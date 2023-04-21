@@ -1,0 +1,58 @@
+.sideBar {
+    width: 300px;
+    height: 100vh;
+
+
+
+    background-color: #2C2C38;
+    border-right: 1px solid rgb(209, 209, 209);
+
+}
+
+.divLogo {
+    height: 97px;
+    padding-left: 34px;
+
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.divLogo img {
+    width: 24px;
+}
+
+.divLogo h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.boards p {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #6E7180;
+}
+
+
+.boards p, ul li {
+    display: flex;
+    align-items: center;
+
+    height: 48px;
+    width: 276px;
+    padding-left: 34px;
+
+    --radius: calc(48px/2);
+    border-radius: 0 var(--radius) var(--radius) 0;
+
+    color: #6E7180;
+    cursor: pointer;
+}
+
+.boards .selected {
+    background-color: #655DCA;
+    color: #ffffff;
+}
