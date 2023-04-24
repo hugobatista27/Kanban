@@ -1,16 +1,15 @@
+@import url('../../global.css');
+
 .sideBar {
-    width: 300px;
+    max-width: 300px;
     height: 100vh;
 
-
-
-    background-color: #2C2C38;
-    border-right: 1px solid rgb(209, 209, 209);
-
+    background-color: var(--bg-header-sideBar);
+    border-right: 1px solid #d1d1d1;
 }
 
 .divLogo {
-    height: 97px;
+    height: var(--hgt-divLogo-header);
     padding-left: 34px;
 
 
@@ -33,26 +32,49 @@
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: #6E7180;
+    color: var(--fc-noSelect);
 }
 
 
-.boards p, ul li {
+.boards p, ul button {
     display: flex;
     align-items: center;
 
     height: 48px;
-    width: 276px;
+    width: 230px;
     padding-left: 34px;
+    margin-right: 20px;
 
     --radius: calc(48px/2);
     border-radius: 0 var(--radius) var(--radius) 0;
 
-    color: #6E7180;
+    color: var(--fc-noSelect);
     cursor: pointer;
+
+ 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;   
 }
+      
+
+
 
 .boards .selected {
-    background-color: #655DCA;
-    color: #ffffff;
+    background-color: var(--fc-emphasis);
+    color: var(--fc-select);
+    font-weight: 700;
+}
+
+.boards img {
+    margin-right: 16px;
+}
+
+.boards button {
+    font-size: 17px;
+}
+
+.buttonNewBoard {
+    color: var(--fc-emphasis);
+    font-weight: 700;
 }

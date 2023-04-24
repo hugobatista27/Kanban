@@ -3,12 +3,11 @@ import Svg from '../../assets/images/Vectorlogo.svg' // no react precisamos semp
 import './sideBar.css'
 
 let allBoards = [
-    {title: "Platform Launch", route: '#', select: true}, {title: "Store", route: '#', select: null},
-    {title: "Market plan", route: '#', select: null}, {title: "Roadmap", route: '#', select: null}
+    {title: "Platform Launch", id: 1, select: null}, {title: "Store", id: 2, select: null}
 ];
 
 function SideBar() {
-    let totalBoards = 0
+    let totalBoards = allBoards.length
     return (
         <div className='sideBar'>
             <div className="divLogo">
