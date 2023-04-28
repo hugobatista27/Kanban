@@ -1,11 +1,11 @@
 @import url('../../global.css');
 
 .sideBar {
-    max-width: 300px;
+    max-width: 250px;
     height: 100vh;
 
     background-color: var(--bg-header-sideBar);
-    border-right: 1px solid #d1d1d1;
+    border-right: 1px solid #575757;
 }
 
 .divLogo {
@@ -36,7 +36,7 @@
 }
 
 
-.boards p, ul button {
+.boards p, .boards button {
     display: flex;
     align-items: center;
 
@@ -47,17 +47,21 @@
 
     --radius: calc(48px/2);
     border-radius: 0 var(--radius) var(--radius) 0;
-
-    color: var(--fc-noSelect);
+    
     cursor: pointer;
-
  
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;   
 }
       
+.boards ul > button {
+    color: var(--fc-noSelect);
+}
 
+.boards button {
+    font-size: 17px;
+}
 
 
 .boards .selected {
@@ -68,10 +72,6 @@
 
 .boards img {
     margin-right: 16px;
-}
-
-.boards button {
-    font-size: 17px;
 }
 
 .buttonNewBoard {

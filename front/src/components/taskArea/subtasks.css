@@ -1,0 +1,105 @@
+@import url('../../global.css');
+
+.boxInfoTask {
+    box-sizing: border-box;
+
+    width: 480px;
+    padding: 35px 30px;
+
+    background-color: var(--bg-header-sideBar);
+
+    border-radius: 7px;
+}
+
+.boxInfoTask h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.03em;
+}
+
+.boxInfoTask p {
+    padding: 25px 0;
+
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 154.9%;
+    color: var(--fc-noSelect);
+}
+
+.boxInfoTask h3 {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 154.9%;
+}
+
+.boxInfoTask .boxSubtasks {
+    max-height: 200px;
+    overflow-y: scroll;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 13px 0;
+}
+
+/* estilos para a barra de rolagem */
+.boxInfoTask .boxSubtasks::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* estilos para o polegar (a parte que você arrasta) */
+.boxInfoTask .boxSubtasks::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1; 
+    border-radius: 5px; 
+}
+
+/* estilos para a trilha (a parte da barra de rolagem que não é o polegar) */
+.boxInfoTask .boxSubtasks::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.boxInfoTask .subtask {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    padding: 15px;
+
+    border-radius: 7px;
+
+    background-color: var(--bg-tasks);
+}
+
+.boxInfoTask label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 108.9%;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.boxInfoTask label.checked {
+    color: var(--fc-noSelect);
+    text-decoration: line-through;
+}
+
+.boxInfoTask select {
+    width: 100%;
+    padding: 11px;
+    margin-top: 10px;
+
+    border: 1px solid var(--fc-noSelect);
+    border-radius: 7px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 154.9%;
+
+    letter-spacing: 0.095em;
+}
+
+.boxInfoTask option {
+    background-color: var(--bg-tasks);
+}

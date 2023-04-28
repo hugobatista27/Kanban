@@ -1,8 +1,9 @@
 :root {
-    --bg-header-sideBar: #2C2C38;
-    --fc-select: #fff;
-    --fc-noSelect: #6E7180;
-    --fc-emphasis: #655DCA;
+    --bg-header-sideBar: rgb(44, 44, 56);
+    --bg-tasks: #21212D;
+    --fc-select: rgb(255, 255, 255);
+    --fc-noSelect: rgb(110, 113, 128);
+    --fc-emphasis: rgb(101, 93, 202);
 
     --hgt-divLogo-header: 97px;
 }

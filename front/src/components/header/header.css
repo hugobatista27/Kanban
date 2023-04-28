@@ -15,6 +15,7 @@
 
 
     background-color: var(--bg-header-sideBar);
+    border-bottom: 1px solid #575757;
 }
 
 .header > h1 {
