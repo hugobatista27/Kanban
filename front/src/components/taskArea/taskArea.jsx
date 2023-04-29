@@ -3,8 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Subtasks from './subtasks.jsx';
 import './taskArea.css'
 
-/* import React, { useState } from 'react';
- */
+
 const teste2 = {
     colunas: [
         {
@@ -109,38 +108,6 @@ const teste2 = {
         },
     ]
 }
-
-/* export default function TaskArea() {
-    const allTasks = teste2
-
-
-    return (
-        <div className='centerObjects'>
-            <div className='taskArea'>
-                {allTasks.colunas.map((coluna) => {
-                    const tasks = allTasks.tarefas.filter((task) => task.colunaId === coluna.id);
-                    return (
-                        <div className='colluns' key={coluna.id} id={coluna.id}>
-                            <p>{coluna.nome.toUpperCase()} ({tasks.length})</p>
-                            {tasks.map((task) => (
-                                <button className='card' key={task.idTarefa} id={task.idTarefa} onClick={showTasks}>
-                                    <p className='taskName'>{task.nome}</p>
-                                    <p className='totalTasks'>
-                                        0 of {task.subtasks.length} substasks
-                                    </p>
-                                </button>
-                            ))}
-                        </div>
-                    );
-                })}
-            </div>
-            <div className='showInfoTask'>
-               <Subtasks task={allTasks.tarefas[0]} colluns={allTasks.colunas}></Subtasks>
-            </div>
-        </div>
-    )
-} */
-
 
 export default function TaskArea() {
     const allTasks = teste2;

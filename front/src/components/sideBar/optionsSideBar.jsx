@@ -1,14 +1,20 @@
+import React from 'react';
 import iconBoard from '../../assets/images/icon-board.svg'
 
-export default function OptionsSideBar(props) {
+export default function OptionsSideBar({buttons, setSelectedProject}) {
+
+    function changeState(selectedProject) {
+        console.log(selectedProject);
+        setSelectedProject(selectedProject)
+    }
 
     return (
         <div>
             <ul id='areaProjectsButton'>
-                {props.buttons.map((object, index) => 
+                {buttons.map((object, index) => 
                     <button key={index} 
                         id={object.id}
-                        onClick={handleClick}
+                        onClick={() => changeState(object)}
                         className={object.select ? 'selected' : ''}>
                         <img src={iconBoard} alt="icon" /> 
                         {object.title}
@@ -18,14 +24,4 @@ export default function OptionsSideBar(props) {
             <button className='buttonNewBoard'>+ Create New Board</button>
         </div>
     )
-}
-
-function handleClick(event) {
-    const buttons = document.getElementById('areaProjectsButton').childNodes
-    buttons.forEach((button) => {
-        button.className = ''
-    });
-    const button = event.target;
-    const id = button.id;
-    button.className = "selected";
 }
