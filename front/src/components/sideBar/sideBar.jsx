@@ -20,6 +20,10 @@ function SideBar({project}) {
             </div>
         </div>
     );
+
+    function getProjects() {
+        fetch()
+    }
 }
 
 export default SideBar;

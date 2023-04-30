@@ -12,7 +12,7 @@ function App() {
         <div className="index">
             <SideBar project={setSelectedProject}></SideBar>
             <div id='contentArea'>
-                <Header project={selectedProject}></Header>
+                <Header project={selectedProject} setProjectTitle={setSelectedProject}></Header>
                 <TaskArea project={selectedProject}></TaskArea>
             </div>
         </div>

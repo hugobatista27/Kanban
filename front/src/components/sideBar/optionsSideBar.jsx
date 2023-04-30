@@ -4,7 +4,7 @@ import iconBoard from '../../assets/images/icon-board.svg'
 export default function OptionsSideBar({buttons, setSelectedProject}) {
 
     function changeState(selectedProject) {
-        console.log(selectedProject);
+        //console.log(selectedProject);
         setSelectedProject(selectedProject)
     }
 

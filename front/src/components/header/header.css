@@ -18,7 +18,7 @@
     border-bottom: 1px solid #575757;
 }
 
-.header > h1 {
+.header > h1, input {
     font-weight: 700;
     font-size: 25px;
     letter-spacing: -0.01em;
