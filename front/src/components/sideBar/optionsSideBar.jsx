@@ -4,7 +4,6 @@ import iconBoard from '../../assets/images/icon-board.svg'
 export default function OptionsSideBar({buttons, setSelectedProject}) {
 
     function changeState(selectedProject) {
-        //console.log(selectedProject);
         setSelectedProject(selectedProject)
     }
 
@@ -13,11 +12,11 @@ export default function OptionsSideBar({buttons, setSelectedProject}) {
             <ul id='areaProjectsButton'>
                 {buttons.map((object, index) => 
                     <button key={index} 
-                        id={object.id}
+                        id={object._id}
                         onClick={() => changeState(object)}
                         className={object.select ? 'selected' : ''}>
                         <img src={iconBoard} alt="icon" /> 
-                        {object.title}
+                        {object.projectName}
                     </button>
                 )}
             </ul>

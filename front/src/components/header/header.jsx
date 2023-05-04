@@ -1,57 +1,70 @@
-import './header.css';
+import '../styles/header.css';
 import ThreeLine from '../../assets/images/three-line.svg';
 import { useState } from 'react';
+import Server from '../../configs/server.js'
 
-function Header({project, setProjectTitle}) {
-
-    return (
-        <div className='header'>
-            <EditableTitle project={project} setProjectTitle={setProjectTitle}></EditableTitle>
-            <div className='options'>
-                <button className='newTask'>+Add new task</button>
-                <button>
-                    <img src={ThreeLine} alt="três pontos" />
-                </button>
-            </div>
-        </div>
-    )
+function Header({ project, setProjectTitle }) {
+  return (
+    <div className="header">
+      <EditableTitle project={project} setProjectTitle={setProjectTitle} />
+      <div className="options">
+        <button className="newTask">+Add new task</button>
+        <button>
+          <img src={ThreeLine} alt="três pontos" />
+        </button>
+      </div>
+    </div>
+  );
 }
 
-function EditableTitle({project, setProjectTitle}) {
-    const [isEditing, setIsEdting] = useState(false);
+function EditableTitle({ project, setProjectTitle }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [titleValue, setTitleValue] = useState(project ? project.projectName : "");
 
-    const handleDoubleClick = () => {
-        setIsEdting(true);
-    };
+  const handleDoubleClick = () => {
+    setIsEditing(true);
+  };
 
-    const handleBlur = () => {
-        setIsEdting(false);
+  const handleBlur = () => {
+    setIsEditing(false);
+    if(project && titleValue !== project.projectName && titleValue != '') {
+        let newProjectTitle = {...project, projectName: titleValue}
+        setProjectTitle(newProjectTitle);
+
+        fetch(Server.projectChangeTitle, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newProjectTitle)
+        })
     }
+  };
 
-    const handleInputChange = (event) => {
-        let teste = {...project}
-        teste.title = event.target.value
-        setProjectTitle(teste)
-    };
-    
-    if(isEditing) {
-        return (
-            <input
-                type='text'
-                value={project === null ? 'Novo projeto' : project.title}
-                onBlur={handleBlur}
-                onChange={handleInputChange}
-                autoFocus
-            />
-        )
-    }
+  
+  const handleInputChange = (event) => {
+    let title = event.target.value
+    setTitleValue(event.target.value);
 
+  };
+
+  if (isEditing) {
     return (
-        <h1 onDoubleClick={handleDoubleClick}> 
-            {project === null ? 'Novo projeto' : project.title}
-        </h1>
-    ) 
+      <input
+        type="text"
+        value={titleValue}
+        onBlur={handleBlur}
+        onChange={handleInputChange}
+        autoFocus
+      />
+    );
+  }
 
+  return (
+    <h1 onDoubleClick={handleDoubleClick}>
+      {project ? project.projectName : "Novo Projeto"}
+    </h1>
+  );
 }
 
 export default Header

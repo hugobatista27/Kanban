@@ -36,24 +36,47 @@ const getAllData = async(req, res) => {
     } 
 }
 
-const getProjectNameAndId = async(req, res) => {
+const getProjectNameAndId = async() => {
+    let itens = await Kanban.find({}, {projectName: 1, id: 1})
+    return itens
+}
+
+const getProjectById = async(req, res) => {
     try {
-        let itens = await Kanban.find({}, {projectName: 1, id: 1})
-        res.send(itens)
-    } catch (error) {
-        res.send(error);
+        let item = await Kanban.findById(req.params.id)
+        res.send(item)
+    } catch(erro) {
+        console.log(erro);
     }
 }
 
-async function updateTitle() {
+const updateTasks = async(req, res) => {
     try {
-        let itens = await Kanban.findOneAndUpdate({_id: '644c0bf48c142252e68ebca6'}, {projectName: 'Troquei a key do ID'})
-        console.log(itens)
-        
+        let task = await Kanban.findByIdAndUpdate(req.body.id, req.body.newTask)
+        res.send('salvo')
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+async function updateTitle(req, res) {
+    try {
+        const newTitle = req.body.projectName;
+        const id = req.body._id;
+
+        const updatedItem = await Kanban.findOneAndUpdate({_id: id}, {projectName: newTitle}, {new: true});
+        if (!updatedItem) {
+            return res.status(404).send('Item não encontrado');
+        }
+        res.send('Atualizado com sucesso!');
     } catch (error) {
         console.log(error);
+        res.status(500).send('Erro ao atualizar item');
     }
 }
 
-module.exports = {novoDado, getAllData, getProjectNameAndId, updateTitle, addNewPoject};
+
+module.exports = {novoDado, getAllData, getProjectNameAndId, updateTitle, addNewPoject, getProjectById, updateTitle};
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import './subtasks.css';
+import '../styles/subtasks.css';
 
-export default function Subtasks(props) {
-    const [tasks, setTasks] = useState(props.task.subtasks);
+export default function Subtasks({task, status}) {
+    const [tasks, setTasks] = useState(task.subtasks);
 
     const handleChange = (index) => {
         const newTasks = [...tasks];
@@ -18,13 +18,14 @@ export default function Subtasks(props) {
 
     return (
             <div className="boxInfoTask">
-                <h2>{props.task.nome}</h2>
-                <p>{props.task.description}</p>
-                <h3>Subtasks ({tasksDone()} of {props.task.subtasks.length})</h3>
+                <h2>{task.taskName}</h2>
+                <p>{task.description}</p>
+                <h3>Subtasks ({tasksDone()} of {task.subtasks.length})</h3>
                 <div className='boxSubtasks'>
                     {tasks.map((subtask, index) => {
                         return (
                             <label 
+                                key={'subtask' + index}
                                 htmlFor={'subtask' + index}
                                 className={subtask.done ? 'checked subtask' : 'subtask'}>
                                 <input 
@@ -42,11 +43,11 @@ export default function Subtasks(props) {
                 <div>
                     <h3>Status</h3>
                     <select name="" id="">
-                        {props.colluns.map((collun) => {
-                            if(collun.id === props.task.colunaId){
-                                return <option selected value={collun.id}>{collun.nome}</option>
+                        {status.map((collun, index) => {
+                            if(collun.idCollun === task.idstatus){
+                                return <option selected value={collun.id} key={'status' + index}>{collun.statusName}</option>
                             } else {
-                                return <option value={collun.id}>{collun.nome}</option>
+                                return <option value={collun.idCollun} key={'status' + index}>{collun.statusName}</option>
                             }
                         })}
                     </select>
