@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import '../styles/subtasks.css';
+import InputArea from '../generic/testeInput.jsx';
 
 export default function Subtasks({task, status}) {
     const [tasks, setTasks] = useState(task.subtasks);
+    const [taskName, setNewTaskName] = useState(task.taskName)
 
     const handleChange = (index) => {
         const newTasks = [...tasks];
@@ -18,6 +20,7 @@ export default function Subtasks({task, status}) {
 
     return (
             <div className="boxInfoTask">
+                <InputArea tag="h2" paramText={taskName} setNewContent={setNewTaskName}/>
                 <h2>{task.taskName}</h2>
                 <p>{task.description}</p>
                 <h3>Subtasks ({tasksDone()} of {task.subtasks.length})</h3>
