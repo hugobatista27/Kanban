@@ -19,6 +19,10 @@ router.get('/project/:id', linkController.getProjectById);
 
 router.put('/project/change-title', express.urlencoded({extended: true}), linkController.updateTitle);
 
-router.post('/new-project', express.urlencoded({extended: true}), linkController.addNewPoject);
+router.put('/project/change-task', express.urlencoded({extended: true}), linkController.updateTasks);
+
+router.post('/new-project', express.urlencoded({extended: true}), linkController.addNewProject);
+
+router.delete('/delete/:id', linkController.deleteById);
 
 module.exports = router

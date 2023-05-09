@@ -4,7 +4,9 @@ const Server = {
     allProjects: `${adress}/allProjects`,
     projectNames: `${adress}/projectsName`,
     selectProjectById: `${adress}/project/`,
-    projectChangeTitle: `${adress}/project/change-title`
+    projectChangeTitle: `${adress}/project/change-title`,
+    updateTask: `${adress}/project/change-task`,
+    newProject: `${adress}/new-project`,
 }
 
 export default Server

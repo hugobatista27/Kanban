@@ -2,10 +2,8 @@ import Header from './components/header/header.jsx';
 import SideBar from './components/sideBar/sideBar.jsx';
 import TaskArea from './components/taskArea/taskArea.jsx'
 
-import InputArea from './components/generic/testeInput.jsx'
-
 import './App.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -28,12 +26,5 @@ function App() {
         </div>
     );
 }
-
-/* <div>
-    <InputArea tag="h2" paramText={newTitle} setNewContent={setNewTitle}/>
-    <InputArea tag="button" paramText={newParagraph} setNewContent={setNewParagraph}/>
-</div> */
-
-
 
 export default App;

@@ -1,24 +1,23 @@
 import { useState } from "react";
 
-const paragrafo = "Descrição Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel explicabo voluptatum ipsa velit cupiditate nobis inventore, odit voluptatibus tempora temporibus, vitae ducimus quam eveniet! Et iure quidem ipsa possimus recusandae."
-
-export default function InputArea({tag, paramText, setNewContent}) {
+export default function InputArea({tag, content, setNewContent}) {
     const [isEditing, setIsEditing] = useState(false);
-    const [text, setText] = useState(paramText)
+    const [text, setText] = useState(content)
     const Tag = tag
 
     const handleDoubleClick = () => {
         setIsEditing(true);
     };
 
-    const verificarTexto = (texto) => {
-        if (texto) {
-            setText()
+    const verificarTexto = (text) => {
+        if (text && text !== content) {
+            setNewContent(text)
         }
     }
 
     const handleBlur = () => {
-        setNewContent(text)
+        verificarTexto(text)
+        
         setIsEditing(false)
     }
 

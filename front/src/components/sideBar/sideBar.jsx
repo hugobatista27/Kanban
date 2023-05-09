@@ -3,10 +3,6 @@ import OptionsSideBar from './optionsSideBar.jsx'
 import Svg from '../../assets/images/Vectorlogo.svg' // no react precisamos sempre importar as imagens
 import '../styles/sideBar.css'
 
-let allBoards = [
-    {title: "Platform Launch", id: 1, select: null}, {title: "Store", id: 2, select: null}
-];
-
 function SideBar({selectedProject, setSelectedProject}) {
     const [projects, setProjects] = useState([{_id: '1', projectName: 'carregando'}])
 
