@@ -18,7 +18,7 @@
     letter-spacing: 0.03em;
 }
 
-.boxInfoTask p {
+.boxInfoTask > div > p {
     padding: 25px 0;
 
     font-weight: 700;

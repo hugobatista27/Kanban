@@ -36,12 +36,10 @@ export default function InputArea({tag, content, setNewContent}) {
                 autoFocus
             ></input>
         )
-        
     } 
 
     return (
         <div>
-            
             <Tag onDoubleClick={handleDoubleClick}>{text}</Tag>
         </div>
     )

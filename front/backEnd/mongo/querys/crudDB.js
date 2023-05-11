@@ -63,14 +63,15 @@ const CRUD = {
 
     updateTasks: async(req, res) => {
         try {
-            const tasks = req.body.task
+            const task = req.body.task
             const id = req.body._id
-
-            const updatedTask = await Kanban.findOneAndUpdate({_id: id}, tasks, {new: true})
+            
+            const updatedTask = await Kanban.findByIdAndUpdate({_id: id}, task, {new: true})
+            await updatedTask.save()
             if (!updatedTask) {
                 return res.status(404).send('Item não encontrado');
             }
-            res.send('Atualizado com sucesso!');
+            res.send(updatedTask);
         } catch(error) {
             console.log(error)
         }

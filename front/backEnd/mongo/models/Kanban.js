@@ -14,7 +14,7 @@ const subtaskSchema = new mongoose.Schema({
 const tasksSchema = new mongoose.Schema({
     taskName: {type: String},
     description: {type: String},
-    status: {type: String, enum: ['TODO', 'IN_PROGRESS', 'DONE']},
+    /* status: {type: String, enum: ['TODO', 'IN_PROGRESS', 'DONE']}, */
     idStatus: {type: Number},
     subtasks: [subtaskSchema]
 })
