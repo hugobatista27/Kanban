@@ -33,6 +33,13 @@ export default function InputArea({tag, content, setNewContent}) {
                 type="text"
                 onBlur={handleBlur}
                 onChange={(event) => setText(event.target.value)}
+                onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                        setText(event.target.value)
+                        handleBlur()
+                        setIsEditing(false)
+                    }
+                }}
                 autoFocus
             ></input>
         )

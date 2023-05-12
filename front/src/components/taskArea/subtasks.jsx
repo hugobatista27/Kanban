@@ -3,7 +3,7 @@ import '../styles/subtasks.css';
 import InputArea from '../generic/testeInput.jsx';
 import Server from '../../configs/server.js';
 
-export default function Subtasks({task, status}) {
+export default function Subtasks({task, status, id, index}) {
     const [subtasks, setSubtasks] = useState(task.subtasks);
 
     const [taskName, setNewTaskName] = useState(task.taskName)
@@ -22,13 +22,12 @@ export default function Subtasks({task, status}) {
         }
 
         if(JSON.stringify(newTask) !== JSON.stringify(task) || JSON.stringify(newTask.subtasks) !== JSON.stringify(task.subtasks)) {
-            delete newTask.status // provisório
             fetch(Server.updateTask, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newTask)
+                body: JSON.stringify({_id: id, index: index, tasks: newTask})
             })
             .then((res) => res.json())
             .then((data) => console.log(data))

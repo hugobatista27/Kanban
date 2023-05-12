@@ -6,6 +6,7 @@ import '../styles/taskArea.css'
 export default function TaskArea({ selectedProject }) {
     const [allTasks, setAllTasks] = useState(null);
     const [selectedTask, setSelectedTask] = useState(null);
+    const [indexOfSelectedTask, setIndexOfSelectedTask] = useState(null)
     const refSubtasks = useRef(null);
 
     const getProject = async () => {
@@ -23,8 +24,9 @@ export default function TaskArea({ selectedProject }) {
         }
     }, [selectedProject])
 
-    const showTasks = (taskId) => {
+    const showTasks = (taskId, index) => {
         const task = allTasks.tasks.find((tarefa) => tarefa._id === taskId);
+        setIndexOfSelectedTask(index)
         setSelectedTask(task);
     };
 
@@ -64,8 +66,8 @@ export default function TaskArea({ selectedProject }) {
                                 <p>
                                     {coluna.statusName.toUpperCase()} ({tasks.length})
                                 </p>
-                                {tasks.map((task) => (
-                                    <div className='cardWrapper' key={task._id} onClick={() => showTasks(task._id)}>
+                                {tasks.map((task, index) => (
+                                    <div className='cardWrapper' key={task._id} onClick={() => showTasks(task._id, index)}>
                                         <button className='card' id={task._id}>
                                             <p className='taskName'>{task.taskName}</p>
                                             <p className='totalTasks'>
@@ -86,7 +88,7 @@ export default function TaskArea({ selectedProject }) {
                             <button className='closeButton' onClick={closeTasks}>
                                 X
                             </button>
-                            <Subtasks task={selectedTask} status={allTasks.status} />
+                            <Subtasks task={selectedTask} status={allTasks.status} index={indexOfSelectedTask} id={selectedProject._id}/>
                         </div>
                     </div>
                 )}

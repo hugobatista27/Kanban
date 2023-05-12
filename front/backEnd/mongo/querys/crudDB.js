@@ -63,11 +63,15 @@ const CRUD = {
 
     updateTasks: async(req, res) => {
         try {
-            const task = req.body.task
+            const task = req.body.tasks
             const id = req.body._id
+            const index = req.body.index
+
+            const caminho = `tasks.${index}`
+            const update = {}
+            update[caminho] = task
             
-            const updatedTask = await Kanban.findByIdAndUpdate({_id: id}, task, {new: true})
-            await updatedTask.save()
+            const updatedTask = await Kanban.updateOne({_id: id}, {$set: update})
             if (!updatedTask) {
                 return res.status(404).send('Item não encontrado');
             }
@@ -104,6 +108,4 @@ const CRUD = {
     }
 }
 
-
 module.exports = CRUD
-
