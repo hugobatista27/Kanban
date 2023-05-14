@@ -1,24 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../styles/subtasks.css';
 import InputArea from '../generic/testeInput.jsx';
 import Server from '../../configs/server.js';
+import ProjectContext from '../../contexts/selectedProjectState';
 
 export default function Subtasks({task, status, id, index}) {
     const [subtasks, setSubtasks] = useState(task.subtasks);
 
+    const [newSubtasks, setNewSubtasks] = useState(task.subtasks)
     const [taskName, setNewTaskName] = useState(task.taskName)
     const [description, setNewDescription] = useState(task.description)
     const [newIdStatus, setNewIdSatus] = useState(task.idStatus)
     const [newSubtaskDescription, setNewSubtaskDescription] = useState(null)
     const [indexSubtask, setIndexSubtask] = useState(null)
 
+    const {setAtualizarFetchTasks} = useContext(ProjectContext)
+
     useEffect(() => {
         let newTask = {
             ...task, 
             description: description,
             idStatus: newIdStatus,
-            subtasks:subtasks,
-            taskName:taskName
+            subtasks: newSubtasks,
+            taskName: taskName
         }
 
         if(JSON.stringify(newTask) !== JSON.stringify(task) || JSON.stringify(newTask.subtasks) !== JSON.stringify(task.subtasks)) {
@@ -30,27 +34,27 @@ export default function Subtasks({task, status, id, index}) {
                 body: JSON.stringify({_id: id, index: index, tasks: newTask})
             })
             .then((res) => res.json())
-            .then((data) => console.log(data))
-
-            console.log('mudouuu')
-        } else {
-            console.log("está igual")
+            .then((data) => {
+                console.log(data)
+                setAtualizarFetchTasks(data)
+            })
+            .catch((erro) => console.log(erro))
         }
-    }, [description, newIdStatus, subtasks, taskName])
+    }, [description, newIdStatus, newSubtasks, taskName])
     
 
     useEffect(() => {
         if(newSubtaskDescription) {
             let newTasks = [...subtasks]
             newTasks[indexSubtask].description = newSubtaskDescription
-            setSubtasks(newTasks)
+            setNewSubtasks(newTasks)
         }
     }, [newSubtaskDescription])
 
     const handleChange = (index) => {
         const newTasks = [...subtasks];
         newTasks[index].done = !newTasks[index].done;
-        setSubtasks(newTasks);
+        setNewSubtasks(newTasks);
     }
 
     const tasksDone = () => {

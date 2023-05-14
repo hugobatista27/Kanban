@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import ProjectContext from '../../contexts/selectedProjectState.js';
 import OptionsSideBar from './optionsSideBar.jsx'
 import Svg from '../../assets/images/Vectorlogo.svg' // no react precisamos sempre importar as imagens
 import '../styles/sideBar.css'
 
-function SideBar({selectedProject, setSelectedProject}) {
+function SideBar() {
+    const {selectedProject, setSelectedProject} = useContext(ProjectContext)
     const [projects, setProjects] = useState([{_id: '1', projectName: 'carregando'}])
 
     const getProjects = async() => {
@@ -15,7 +17,7 @@ function SideBar({selectedProject, setSelectedProject}) {
     
     useEffect(() => {
         getProjects();
-    },[selectedProject])
+    }, [selectedProject])
 
     return (
         <div className='sideBar'>

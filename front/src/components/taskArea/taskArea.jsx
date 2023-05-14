@@ -1,7 +1,8 @@
 //import React, { useState, useEffect, useRef } from 'react';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Subtasks from './subtasks.jsx';
 import '../styles/taskArea.css'
+import ProjectContext from '../../contexts/selectedProjectState.js';
 
 export default function TaskArea({ selectedProject }) {
     const [allTasks, setAllTasks] = useState(null);
@@ -9,9 +10,13 @@ export default function TaskArea({ selectedProject }) {
     const [indexOfSelectedTask, setIndexOfSelectedTask] = useState(null)
     const refSubtasks = useRef(null);
 
+    const {atualizarFetchTasks} = useContext(ProjectContext)
+
     const getProject = async () => {
         fetch('http://192.168.3.11:3001/project/' + selectedProject._id)
-        .then(res => res.json())
+        .then(res => {
+            return res.json()
+        })
         .then(data => {
             setAllTasks(data)
         })
@@ -22,11 +27,15 @@ export default function TaskArea({ selectedProject }) {
         if(selectedProject !== null){
             getProject()
         }
-    }, [selectedProject])
+    }, [selectedProject, atualizarFetchTasks])
 
-    const showTasks = (taskId, index) => {
+    const showTasks = (taskId) => {
         const task = allTasks.tasks.find((tarefa) => tarefa._id === taskId);
-        setIndexOfSelectedTask(index)
+        allTasks.tasks.forEach((task, indexTask) => {
+            if(task._id === taskId) {
+                setIndexOfSelectedTask(indexTask)
+            }
+        })
         setSelectedTask(task);
     };
 
@@ -67,7 +76,7 @@ export default function TaskArea({ selectedProject }) {
                                     {coluna.statusName.toUpperCase()} ({tasks.length})
                                 </p>
                                 {tasks.map((task, index) => (
-                                    <div className='cardWrapper' key={task._id} onClick={() => showTasks(task._id, index)}>
+                                    <div className='cardWrapper' key={task._id} onClick={() => showTasks(task._id)}>
                                         <button className='card' id={task._id}>
                                             <p className='taskName'>{task.taskName}</p>
                                             <p className='totalTasks'>

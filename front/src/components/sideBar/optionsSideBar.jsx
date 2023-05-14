@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import iconBoard from '../../assets/images/icon-board.svg'
 import Server from '../../configs/server'
-import TesteInput from '../generic/testeInput.jsx'
 
 export default function OptionsSideBar({buttons, setSelectedProject}) {
     const [isSelected, setIsSelected] = useState('')
