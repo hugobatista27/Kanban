@@ -13,8 +13,12 @@ export default function Subtasks({task, status, id, index}) {
     const [newIdStatus, setNewIdSatus] = useState(task.idStatus)
     const [newSubtaskDescription, setNewSubtaskDescription] = useState(null)
     const [indexSubtask, setIndexSubtask] = useState(null)
+    const [mudou, setMudou] = useState(false)
 
     const {setAtualizarFetchTasks} = useContext(ProjectContext)
+
+    const [displayNewSubtask, setDisplayNewSubtask] = useState(false)
+    const [newSubtask, setNewSubtask] = useState(null)
 
     useEffect(() => {
         let newTask = {
@@ -25,7 +29,7 @@ export default function Subtasks({task, status, id, index}) {
             taskName: taskName
         }
 
-        if(JSON.stringify(newTask) !== JSON.stringify(task) || JSON.stringify(newTask.subtasks) !== JSON.stringify(task.subtasks)) {
+        if(JSON.stringify(newTask) !== JSON.stringify(task) || mudou) {
             fetch(Server.updateTask, {
                 method: "PUT",
                 headers: {
@@ -35,11 +39,11 @@ export default function Subtasks({task, status, id, index}) {
             })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 setAtualizarFetchTasks(data)
+                setMudou(false)
             })
             .catch((erro) => console.log(erro))
-        }
+        } 
     }, [description, newIdStatus, newSubtasks, taskName])
     
 
@@ -48,13 +52,27 @@ export default function Subtasks({task, status, id, index}) {
             let newTasks = [...subtasks]
             newTasks[indexSubtask].description = newSubtaskDescription
             setNewSubtasks(newTasks)
+            setMudou(true)
         }
     }, [newSubtaskDescription])
+
+    useEffect(() => {
+        if(newSubtask){
+            let obj = {
+                description: newSubtask,
+                done: false
+            }
+            let array = [...newSubtasks]
+            array.push(obj)
+            setNewSubtasks(array)
+        }
+    }, [newSubtask])
 
     const handleChange = (index) => {
         const newTasks = [...subtasks];
         newTasks[index].done = !newTasks[index].done;
         setNewSubtasks(newTasks);
+        setMudou(true)
     }
 
     const tasksDone = () => {
@@ -63,15 +81,25 @@ export default function Subtasks({task, status, id, index}) {
         }, 0)
     }
 
+    const createSubtask = () => {
+        setDisplayNewSubtask(true)
+    }
+
     return (
         <div className="boxInfoTask">
             <InputArea tag="h2" content={taskName} setNewContent={setNewTaskName}/>
             <InputArea tag="p" content={description} setNewContent={setNewDescription}/>
-            <div>
+            <div className='addSubtask'>
                 <h3>Subtasks ({tasksDone()} of {task.subtasks.length})</h3>
-                <button>+</button>
+                <button onClick={createSubtask}>+</button>
             </div>
             <div className='boxSubtasks'>
+                <label 
+                    htmlFor=""
+                    className={ displayNewSubtask ? 'subtask' : 'd-none' }>
+                    <input type="checkbox" name="" id="" />
+                    <InputArea tag="p" content={newSubtask ? '' : 'Nova tarefa'} setNewContent={setNewSubtask}/>
+                </label>
                 {subtasks.map((subtask, index) => {
                     return (
                         <label 
@@ -94,13 +122,9 @@ export default function Subtasks({task, status, id, index}) {
             </div>
             <div>
                 <h3>Status</h3>
-                <select name="" id="" onChange={(event) => setNewIdSatus(event.target.value)}>
+                <select name="" id="" value={newIdStatus} onChange={(event) => setNewIdSatus(event.target.value)}>
                     {status.map((collun, index) => {
-                        if(collun.idCollun === newIdStatus){
-                            return <option selected value={collun.idCollun} key={'status' + index}>{collun.statusName}</option>
-                        } else {
-                            return <option value={collun.idCollun} key={'status' + index}>{collun.statusName}</option>
-                        }
+                        return <option value={collun.idCollun} key={'status' + index}>{collun.statusName}</option>                     
                     })}
                 </select>
             </div>
