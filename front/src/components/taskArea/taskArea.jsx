@@ -75,7 +75,7 @@ export default function TaskArea({ selectedProject }) {
                                 <p>
                                     {coluna.statusName.toUpperCase()} ({tasks.length})
                                 </p>
-                                {tasks.map((task, index) => (
+                                {tasks.map((task) => (
                                     <div className='cardWrapper' key={task._id} onClick={() => showTasks(task._id)}>
                                         <button className='card' id={task._id}>
                                             <p className='taskName'>{task.taskName}</p>

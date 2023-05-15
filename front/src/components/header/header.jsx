@@ -59,8 +59,7 @@ function EditableTitle() {
 			onBlur={handleBlur}
 			onChange={handleInputChange}
 			autoFocus
-		/>
-		);
+		/>);
 	}
 
 	return (

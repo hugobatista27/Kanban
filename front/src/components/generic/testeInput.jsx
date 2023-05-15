@@ -41,6 +41,7 @@ export default function InputArea({tag, content, setNewContent}) {
                     }
                 }}
                 autoFocus
+                className="changeText"
             ></input>
         )
     } 

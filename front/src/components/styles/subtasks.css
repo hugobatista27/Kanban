@@ -1,6 +1,10 @@
 @import url('../../global.css');
 
 .boxInfoTask {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
     box-sizing: border-box;
 
     width: 480px;
@@ -18,9 +22,29 @@
     letter-spacing: 0.03em;
 }
 
-.boxInfoTask > div > p {
-    padding: 25px 0;
+.boxInfoTask .addSubtask {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
+    width: 100%;
+}
+
+.boxInfoTask .addSubtask > button {
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    font-size: 20px;
+    line-height: 0;
+}
+
+.boxInfoTask .addSubtask > button:hover {
+    background-color: var(--bg-tasks);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.boxInfoTask > div > p {
     font-weight: 700;
     font-size: 14px;
     line-height: 154.9%;
@@ -40,8 +64,6 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-
-    padding: 13px 0;
 }
 
 /* estilos para a barra de rolagem */
@@ -102,4 +124,8 @@
 
 .boxInfoTask option {
     background-color: var(--bg-tasks);
+}
+
+.boxInfoTask .changeText {
+    height: 25px;
 }
