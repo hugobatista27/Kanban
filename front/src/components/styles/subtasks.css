@@ -140,11 +140,11 @@
     width: 90%;
 }
 
-.boxInfoTask .subtaskDescription button, img {
+.boxInfoTask .subtaskDescription button, .boxInfoTask .subtaskDescription img {
     display: none;
     width: 12px;
 }
 
-.boxInfoTask .subtask:hover button, img {
+.boxInfoTask .subtask:hover button, .boxInfoTask .subtaskDescription img {
     display: block;
 }

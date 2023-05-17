@@ -5,20 +5,45 @@ import Server from '../../configs/server.js'
 import ProjectContext from '../../contexts/selectedProjectState';
 
 function Header() {
-	const {selectedProject, setSelectedProject} = useContext(ProjectContext)
+	const {selectedProject, setSelectedProject, setAtualizarFetchTasks} = useContext(ProjectContext)
+
+	const newProject = () => {
+		const modelNewTask = {
+			id: selectedProject._id,
+			newTask: {
+				taskName: "Título",
+				description: "Descrição",
+				idStatus: 1,
+				subtasks: []
+			}
+		}
+	
+		fetch(Server.newTask, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(modelNewTask)
+		}).then(() => {
+			setAtualizarFetchTasks(Math.random() * Math.random())
+		})
+	}
 
 	return (
 		<div className="header">
-		<EditableTitle project={selectedProject} setProjectTitle={setSelectedProject} />
-		<div className="options">
-			<button className="newTask">+Add new task</button>
-			<button>
-			<img src={ThreeLine} alt="três pontos" />
-			</button>
+			<EditableTitle project={selectedProject} setProjectTitle={setSelectedProject} />
+			<div className="options">
+				<button 
+					className="newTask"
+					onClick={newProject}>
+					+Add new task
+				</button>
+				<button>
+					<img src={ThreeLine} alt="options" />
+				</button>
+			</div>
 		</div>
-		</div>
-	);
-	}
+	)}
 
 function EditableTitle() {
 	const {selectedProject, setSelectedProject} = useContext(ProjectContext);
@@ -44,11 +69,9 @@ function EditableTitle() {
 			})
 		}
 	};
-
 	
 	const handleInputChange = (event) => {
-/* 		let title = event.target.value
- */		setTitleValue(event.target.value);
+		setTitleValue(event.target.value);
 	};
 
 	if (isEditing) {

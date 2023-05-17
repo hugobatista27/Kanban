@@ -40,7 +40,7 @@ const exemplo = {
         _id: {default: mongoose.Types.ObjectId},
         taskName: {type: String},
         description: {type: String},
-        status: {type: String, enum: ['TODO', 'IN_PROGRESS', 'DONE']},
+        /* status: {type: String, enum: ['TODO', 'IN_PROGRESS', 'DONE']}, */
         idStatus: {type: Number},
         subtasks: [{
             idSubtask: {type: Number},
@@ -68,7 +68,7 @@ const exemplo2 = {
         _id: {default: mongoose.Types.ObjectId},
         taskName: "Criar o FrontEnd",
         description: "Desenvolver o front da aplicação, incluindo responsividade e ações",
-        status: "TODO",
+        /* status: "TODO", */
         idStatus: 1,
         subtasks: [
             {

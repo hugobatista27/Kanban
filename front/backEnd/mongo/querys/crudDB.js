@@ -38,6 +38,17 @@ const CRUD = {
         }
     },
 
+    addNewTask: async(req, res) => {
+        try {
+            let project = await Kanban.findById(req.body.id)
+            project.tasks.push(req.body.newTask)
+            await project.save()
+            res.send('salvo')
+        } catch (error) {
+            res.send(error)
+        }
+    },
+
     getAllData: async(req, res) => {
         try {
             let itens = await Kanban.find();

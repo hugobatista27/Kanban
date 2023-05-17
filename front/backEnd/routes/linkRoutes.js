@@ -23,6 +23,8 @@ router.put('/project/change-task', express.urlencoded({extended: true}), linkCon
 
 router.post('/new-project', express.urlencoded({extended: true}), linkController.addNewProject);
 
+router.put('/project/new-task', express.urlencoded({extended: true}), linkController.addNewTask)
+
 router.delete('/delete/:id', linkController.deleteById);
 
 module.exports = router
