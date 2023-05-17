@@ -129,3 +129,22 @@
 .boxInfoTask .changeText {
     height: 25px;
 }
+
+.boxInfoTask .subtaskDescription {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.boxInfoTask .subtaskDescription > input {
+    width: 90%;
+}
+
+.boxInfoTask .subtaskDescription button, img {
+    display: none;
+    width: 12px;
+}
+
+.boxInfoTask .subtask:hover button, img {
+    display: block;
+}

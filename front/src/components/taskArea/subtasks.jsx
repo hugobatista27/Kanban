@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import '../styles/subtasks.css';
 import InputArea from '../generic/testeInput.jsx';
 import Server from '../../configs/server.js';
 import ProjectContext from '../../contexts/selectedProjectState';
+import TrashIcon from '../../assets/images/trash-icon.svg'
 
 export default function Subtasks({task, status, id, index}) {
     const [subtasks, setSubtasks] = useState(task.subtasks);
@@ -19,6 +20,8 @@ export default function Subtasks({task, status, id, index}) {
 
     const [displayNewSubtask, setDisplayNewSubtask] = useState(false)
     const [newSubtask, setNewSubtask] = useState(null)
+
+    const inputNewSubtask = useRef(null);
 
     useEffect(() => {
         let newTask = {
@@ -41,9 +44,10 @@ export default function Subtasks({task, status, id, index}) {
             .then((data) => {
                 setAtualizarFetchTasks(data)
                 setMudou(false)
+                //console.log(newSubtasks)
             })
             .catch((erro) => console.log(erro))
-        } 
+        }
     }, [description, newIdStatus, newSubtasks, taskName])
     
 
@@ -69,14 +73,17 @@ export default function Subtasks({task, status, id, index}) {
     }, [newSubtask])
 
     const handleChange = (index) => {
-        const newTasks = [...subtasks];
+        const newTasks = [...newSubtasks];
         newTasks[index].done = !newTasks[index].done;
         setNewSubtasks(newTasks);
         setMudou(true)
+
+        console.log('novo', newSubtasks)
+        console.log('velho', subtasks)
     }
 
     const tasksDone = () => {
-        return subtasks.reduce((count, task) => {
+        return newSubtasks.reduce((count, task) => {
             return count + (task.done ? 1 : 0)
         }, 0)
     }
@@ -84,6 +91,19 @@ export default function Subtasks({task, status, id, index}) {
     const createSubtask = () => {
         setDisplayNewSubtask(true)
     }
+
+    const deleteSubtask = (index) => {
+        let array = [...newSubtasks]
+        array.splice(index, 1);
+        setNewSubtasks(array);
+    }
+
+    useEffect(() => {
+        if (displayNewSubtask) {
+            inputNewSubtask.current.value = ''
+            inputNewSubtask.current.focus()
+        }
+    }, [displayNewSubtask])
 
     return (
         <div className="boxInfoTask">
@@ -98,9 +118,12 @@ export default function Subtasks({task, status, id, index}) {
                     htmlFor=""
                     className={ displayNewSubtask ? 'subtask' : 'd-none' }>
                     <input type="checkbox" name="" id="" />
-                    <InputArea tag="p" content={newSubtask ? '' : 'Nova tarefa'} setNewContent={setNewSubtask}/>
+                    <input type="text" ref={inputNewSubtask} onBlur={(event) => {
+                        setNewSubtask(event.target.value)
+                        setDisplayNewSubtask(false)
+                    }}/>
                 </label>
-                {subtasks.map((subtask, index) => {
+                {newSubtasks.map((subtask, index) => {
                     return (
                         <label 
                             key={'subtask' + index}
@@ -115,7 +138,13 @@ export default function Subtasks({task, status, id, index}) {
                                 checked={subtask.done}
                                 onChange={() => handleChange(index)}
                             />
-                            <InputArea tag="p" content={subtasks[index].description} setNewContent={setNewSubtaskDescription}/>
+                            <div className='subtaskDescription'>
+                                <InputArea tag="p" content={newSubtasks[index].description} setNewContent={setNewSubtaskDescription}/>
+                                <button 
+                                    onClick={() => deleteSubtask(index)}>
+                                    <img src={TrashIcon} alt="Apagar"/>
+                                </button>
+                            </div>
                         </label>
                     )
                 })}

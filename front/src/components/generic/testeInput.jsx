@@ -2,8 +2,8 @@ import { useState } from "react";
 
 export default function InputArea({tag, content, setNewContent}) {
     const [isEditing, setIsEditing] = useState(false);
-    const [text, setText] = useState(content)
-    const Tag = tag
+    const [text, setText] = useState(content);
+    const Tag = tag;
 
     const handleDoubleClick = () => {
         setIsEditing(true);
@@ -17,7 +17,6 @@ export default function InputArea({tag, content, setNewContent}) {
 
     const handleBlur = () => {
         verificarTexto(text)
-        
         setIsEditing(false)
     }
 
@@ -47,8 +46,8 @@ export default function InputArea({tag, content, setNewContent}) {
     } 
 
     return (
-        <div>
+        <>
             <Tag onDoubleClick={handleDoubleClick}>{text}</Tag>
-        </div>
+        </>
     )
 }
