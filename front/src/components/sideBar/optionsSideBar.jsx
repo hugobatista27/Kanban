@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import iconBoard from '../../assets/images/icon-board.svg'
 import Server from '../../configs/server'
+import ProjectContext from '../../contexts/selectedProjectState.js';
+
 
 export default function OptionsSideBar({buttons, setSelectedProject}) {
     const [isSelected, setIsSelected] = useState('')
+    const {selectedProject} = useContext(ProjectContext)
 
-    function changeState(selectedProject) {
-        setSelectedProject(selectedProject)
+    useEffect(() => {
+        if (selectedProject) {
+            changeState(selectedProject)   
+        }
+    }, [selectedProject])
 
-        if(isSelected !== selectedProject._id){
-            document.getElementById(selectedProject._id).classList.toggle('selected');
+    function changeState(project) {
+    setSelectedProject(project)
+        if(isSelected !== project._id){
+            // setTimeOut provisório
+            setTimeout(() => {
+                document.getElementById(project._id).classList.toggle('selected');
+            }, 100);
             if (isSelected) {
                 document.getElementById(isSelected).classList.toggle('selected');                
             }
-            setIsSelected(selectedProject._id);
+            setIsSelected(project._id);
         }
     }
 

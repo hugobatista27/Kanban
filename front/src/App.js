@@ -9,9 +9,10 @@ import ProjectContext from './contexts/selectedProjectState.js';
 function App() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [atualizarFetchTasks, setAtualizarFetchTasks] = useState(null)
+    const [projects, setProjects] = useState([{_id: '1', projectName: 'carregando'}])
 
     return (
-        <ProjectContext.Provider value={{selectedProject, setSelectedProject, atualizarFetchTasks, setAtualizarFetchTasks}}>
+        <ProjectContext.Provider value={{selectedProject, setSelectedProject, atualizarFetchTasks, setAtualizarFetchTasks, projects, setProjects}}>
             <div className="index">
                 <SideBar/>
                 <div id='contentArea'>

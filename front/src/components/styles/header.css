@@ -32,9 +32,27 @@
 }
 
 .header .newTask {
-    width: 164px;
-    height: 48px;
+    width: 150px;
+    height: 40px;
     border-radius: 24px;
 
     background-color: var(--fc-emphasis);
+}
+
+.header .newTask:hover {
+    border: 1px solid #fff;
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.header .containerMenuOptions {
+    position: relative;
+}
+
+.header .containerMenuOptions > button {
+    width: 20px;
+}
+
+.header .containerMenuOptions button:hover {
+    cursor: pointer;
 }

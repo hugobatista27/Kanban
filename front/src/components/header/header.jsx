@@ -1,11 +1,16 @@
 import '../styles/header.css';
+import '../styles/menuOptions.css'
 import ThreeLine from '../../assets/images/three-line.svg';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import Server from '../../configs/server.js'
 import ProjectContext from '../../contexts/selectedProjectState';
+import MenuOptions from './menuOptions';
 
 function Header() {
 	const {selectedProject, setSelectedProject, setAtualizarFetchTasks} = useContext(ProjectContext)
+
+	const [showMenuOptions, setShowMenuOptions] = useState(false) 
+	const refMenuOptions = useRef(null)
 
 	const newProject = () => {
 		const modelNewTask = {
@@ -29,6 +34,20 @@ function Header() {
 		})
 	}
 
+	useEffect(() => {
+		function handleClickOutside(event) {
+			if (refMenuOptions.current && !refMenuOptions.current.contains(event.target)) {
+				setShowMenuOptions(false);
+			}
+		}
+	
+		document.addEventListener('mousedown', handleClickOutside);
+	
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [refMenuOptions])
+
 	return (
 		<div className="header">
 			<EditableTitle project={selectedProject} setProjectTitle={setSelectedProject} />
@@ -38,9 +57,18 @@ function Header() {
 					onClick={newProject}>
 					+Add new task
 				</button>
-				<button>
-					<img src={ThreeLine} alt="options" />
-				</button>
+				<div className='containerMenuOptions'>
+					<button 
+						onClick={() => {
+							showMenuOptions ? setShowMenuOptions(false) : setShowMenuOptions(true)
+							
+						}}>
+						<img src={ThreeLine} alt="options" />
+					</button>
+					<div ref={refMenuOptions} className={showMenuOptions ? 'menuOptions' : 'd-none'}>
+						<MenuOptions/> 
+					</div>
+				</div>
 			</div>
 		</div>
 	)}

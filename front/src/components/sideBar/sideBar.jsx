@@ -6,7 +6,7 @@ import '../styles/sideBar.css'
 
 function SideBar() {
     const {selectedProject, setSelectedProject} = useContext(ProjectContext)
-    const [projects, setProjects] = useState([{_id: '1', projectName: 'carregando'}])
+    const {projects, setProjects} = useContext(ProjectContext)
 
     const getProjects = async() => {
         fetch('http://192.168.3.11:3001/projectsName')

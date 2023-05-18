@@ -112,7 +112,7 @@ const CRUD = {
     deleteById: async(req, res) => {
         try {
             let iten = await Kanban.findByIdAndDelete(req.params.id)
-            res.send('item ecluído')
+            res.send('item excluído')
         } catch (error) {
             console.log(error);
         }

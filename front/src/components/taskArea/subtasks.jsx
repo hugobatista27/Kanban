@@ -44,7 +44,6 @@ export default function Subtasks({task, status, id, index}) {
             .then((data) => {
                 setAtualizarFetchTasks(data)
                 setMudou(false)
-                //console.log(newSubtasks)
             })
             .catch((erro) => console.log(erro))
         }
@@ -77,9 +76,6 @@ export default function Subtasks({task, status, id, index}) {
         newTasks[index].done = !newTasks[index].done;
         setNewSubtasks(newTasks);
         setMudou(true)
-
-        console.log('novo', newSubtasks)
-        console.log('velho', subtasks)
     }
 
     const tasksDone = () => {
