@@ -66,7 +66,7 @@ function Header() {
 						<img src={ThreeLine} alt="options" />
 					</button>
 					<div ref={refMenuOptions} className={showMenuOptions ? 'menuOptions' : 'd-none'}>
-						<MenuOptions/> 
+						<MenuOptions/>
 					</div>
 				</div>
 			</div>

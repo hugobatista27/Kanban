@@ -10,9 +10,10 @@ function App() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [atualizarFetchTasks, setAtualizarFetchTasks] = useState(null)
     const [projects, setProjects] = useState([{_id: '1', projectName: 'carregando'}])
+    const [selectedTask, setSelectedTask] = useState(null)
 
     return (
-        <ProjectContext.Provider value={{selectedProject, setSelectedProject, atualizarFetchTasks, setAtualizarFetchTasks, projects, setProjects}}>
+        <ProjectContext.Provider value={{selectedProject, setSelectedProject, atualizarFetchTasks, setAtualizarFetchTasks, projects, setProjects, selectedTask, setSelectedTask}}>
             <div className="index">
                 <SideBar/>
                 <div id='contentArea'>

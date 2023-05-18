@@ -15,11 +15,25 @@
     border-radius: 7px;
 }
 
-.boxInfoTask h2 {
+.boxInfoTask .titleArea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.boxInfoTask .titleArea h2 {
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
     letter-spacing: 0.03em;
+}
+
+.boxInfoTask .titleArea button.optionsTask {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px;
 }
 
 .boxInfoTask .addSubtask {
@@ -44,7 +58,7 @@
     transition: 0.5s;
 }
 
-.boxInfoTask > div > p {
+.boxInfoTask > p {
     font-weight: 700;
     font-size: 14px;
     line-height: 154.9%;
@@ -102,7 +116,7 @@
     cursor: pointer;
 }
 
-.boxInfoTask label.checked {
+.boxInfoTask label.checked p{
     color: var(--fc-noSelect);
     text-decoration: line-through;
 }
@@ -147,4 +161,8 @@
 
 .boxInfoTask .subtask:hover button, .boxInfoTask .subtaskDescription img {
     display: block;
+}
+
+.boxInfoTask input[type="text"]{
+    width: 100%;
 }

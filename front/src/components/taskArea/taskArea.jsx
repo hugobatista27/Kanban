@@ -6,11 +6,10 @@ import ProjectContext from '../../contexts/selectedProjectState.js';
 
 export default function TaskArea({ selectedProject }) {
     const [allTasks, setAllTasks] = useState(null);
-    const [selectedTask, setSelectedTask] = useState(null);
     const [indexOfSelectedTask, setIndexOfSelectedTask] = useState(null)
     const refSubtasks = useRef(null);
 
-    const {atualizarFetchTasks} = useContext(ProjectContext)
+    const {atualizarFetchTasks, selectedTask, setSelectedTask} = useContext(ProjectContext)
 
     const getProject = async () => {
         fetch('http://192.168.3.11:3001/project/' + selectedProject._id)

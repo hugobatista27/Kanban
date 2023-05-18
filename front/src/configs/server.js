@@ -8,7 +8,8 @@ const Server = {
     updateTask: `${adress}/project/change-task`,
     newProject: `${adress}/new-project`,
     newTask: `${adress}/project/new-task`,
-    deleteProject: `${adress}/delete/`
+    deleteProject: `${adress}/delete/`,
+    deleteTask: `${adress}/delete/task/`
 }
 
 export default Server

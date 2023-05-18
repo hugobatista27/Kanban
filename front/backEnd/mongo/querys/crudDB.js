@@ -116,6 +116,21 @@ const CRUD = {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    deleteTask: async(req, res) => {
+        try {
+            let project = await Kanban.findById(req.params.id)
+            project.tasks = project.tasks.filter((task) => {
+                if (task._id != req.body.taskId) {
+                    return task
+                }
+            })
+            await project.save()
+            res.send('Deletado')
+        } catch (error) {
+            res.send(error);
+        }
     }
 }
 

@@ -27,4 +27,6 @@ router.put('/project/new-task', express.urlencoded({extended: true}), linkContro
 
 router.delete('/delete/:id', linkController.deleteById);
 
+router.delete('/delete/task/:id', express.urlencoded({extended: true}), linkController.deleteTask)
+
 module.exports = router

@@ -4,6 +4,9 @@ import InputArea from '../generic/testeInput.jsx';
 import Server from '../../configs/server.js';
 import ProjectContext from '../../contexts/selectedProjectState';
 import TrashIcon from '../../assets/images/trash-icon.svg'
+import ThreeLine from '../../assets/images/three-line.svg';
+import MenuOptionsTask from './menuOptionsTasks.jsx';
+
 
 export default function Subtasks({task, status, id, index}) {
     const [subtasks, setSubtasks] = useState(task.subtasks);
@@ -20,6 +23,9 @@ export default function Subtasks({task, status, id, index}) {
 
     const [displayNewSubtask, setDisplayNewSubtask] = useState(false)
     const [newSubtask, setNewSubtask] = useState(null)
+
+    const [showOptions, setShowOptions] = useState(false);
+    const refMenuOptionsTask = useRef(null)
 
     const inputNewSubtask = useRef(null);
 
@@ -101,9 +107,36 @@ export default function Subtasks({task, status, id, index}) {
         }
     }, [displayNewSubtask])
 
+    useEffect(() => {
+		function handleClickOutside(event) {
+			if (refMenuOptionsTask.current && !refMenuOptionsTask.current.contains(event.target)) {
+				setShowOptions(false);
+			}
+		}
+	
+		document.addEventListener('mousedown', handleClickOutside);
+	
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [refMenuOptionsTask])
+
     return (
         <div className="boxInfoTask">
-            <InputArea tag="h2" content={taskName} setNewContent={setNewTaskName}/>
+            <div className="titleArea">
+                <InputArea tag="h2" content={taskName} setNewContent={setNewTaskName}/>
+                <div className='containerMenuOptions'>
+                    <button 
+                        className='optionsTask'
+                        onClick={() => setShowOptions(true)}
+                        >
+                        <img src={ThreeLine} alt="options" />
+                    </button>
+                    <div ref={refMenuOptionsTask} className={showOptions ? 'menuOptionsTask' : 'd-none'}>
+                        <MenuOptionsTask task={task}/>
+                    </div>
+                </div>
+            </div>
             <InputArea tag="p" content={description} setNewContent={setNewDescription}/>
             <div className='addSubtask'>
                 <h3>Subtasks ({tasksDone()} of {task.subtasks.length})</h3>
