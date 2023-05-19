@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700;900&display=swap');
+
+$color-header: #2c2c38;
+$color-tasks: #21212D;
+$color-fontMain: #ffffff;
+$color-fontSub: #6e7180;
+$color-emphasis: #655dca;
+
+$height-header: 97px;
+
+@mixin flex($justify, $align) {
+    display: flex;
+
+    @if $justify {
+        justify-content: $justify;
+    }
+
+    @if $align {
+        align-items: $align;
+    }
+}
+

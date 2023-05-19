@@ -1,0 +1,212 @@
+@use '../../../global-teste.scss' as config;
+
+.centerObjects {
+    position: relative;
+    height: 85%;
+}
+
+.taskArea {
+    max-height: 100%;
+
+    display: flex;
+    gap: 24px;
+    padding: 20px;
+
+    &>.colluns{
+        width: 33%;
+    }
+
+    &>.colluns > p {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18px;
+    
+        letter-spacing: 0.25em;
+    }
+
+    .card{
+        width: 100%;
+        border-radius: 10px;
+        padding: 20px 18px;
+        margin-top: 20px;
+    
+        text-align: left;
+    
+        background-color: config.$color-header;
+
+        &:hover {
+            transition: 0.3s;
+            box-shadow: 0px 6px 0px -1px rgba(255, 255, 255, 0.25);
+        }
+
+        .taskName {
+            font-weight: 400;
+            font-size: 17px;
+            letter-spacing: -5.5%;
+        
+            color: #FFFFFF;
+        }
+
+        .totalTasks {
+            margin-top: 10px;
+        
+            font-style: normal;
+            font-weight: 700;
+            font-size: 13px;
+        
+            letter-spacing: -0.04em;
+        
+            color: #8E9099;
+        }
+    }
+}
+
+.showInfoTask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .boxInfoTask {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    
+        box-sizing: border-box;
+    
+        width: 480px;
+        padding: 35px 30px;
+    
+        background-color: config.$color-header;
+    
+        border-radius: 7px;
+
+        .titleArea {
+            @include config.flex(space-between, center);
+
+            h2 {
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 23px;
+                letter-spacing: 0.03em;
+            }
+            button.optionsTask {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                cursor: pointer;
+                padding: 5px;
+            }
+        }
+        
+        .addSubtask {
+            @include config.flex(space-between, center);
+        
+            width: 100%;
+        }
+        .addSubtask > button {
+            width: 40px;
+            height: 40px;
+            border-radius: 25px;
+            font-size: 20px;
+            line-height: 0;
+            &:hover {
+                background-color: config.$color-tasks;
+                cursor: pointer;
+                transition: 0.5s;
+            }
+        }
+
+        & > p {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 154.9%;
+            color: config.$color-fontSub;
+        }
+        h3 {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 154.9%;
+        }
+
+        .boxSubtasks {
+            max-height: 200px;
+            overflow-y: scroll;
+        
+            display: flex;
+            flex-direction: column;
+            gap: 8px; 
+            
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: #c1c1c1; 
+                border-radius: 5px; 
+            }
+            &::-webkit-scrollbar-track {
+                background-color: transparent;
+            }
+        }
+        .subtask {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            padding: 15px;
+        
+            border-radius: 7px;
+        
+            background-color: config.$color-tasks;
+        }
+        label {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 108.9%;
+        
+            user-select: none;
+            cursor: pointer;
+        }
+        label.checked p{
+            color: config.$color-fontSub;
+            text-decoration: line-through;
+        }
+        select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 10px;
+        
+            border: 1px solid config.$color-fontSub;
+            border-radius: 7px;
+        
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 154.9%;
+        
+            letter-spacing: 0.095em;
+        }
+        option {
+            background-color: config.$color-tasks;
+        }
+        .changeText {
+            height: 25px;
+        }
+        .subtaskDescription {
+            @include config.flex(space-between, none);
+            width: 100%;
+        }
+        .subtaskDescription > input {
+            width: 90%;
+        }
+        .subtaskDescription button, .subtaskDescription img {
+            display: none;
+            width: 12px;
+        }
+        .subtask:hover button, .subtaskDescription img {
+            display: block;
+        }
+        input[type="text"]{
+            width: 100%;
+        }
+    }
+}

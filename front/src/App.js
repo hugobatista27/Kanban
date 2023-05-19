@@ -2,7 +2,8 @@ import Header from './components/header/header.jsx';
 import SideBar from './components/sideBar/sideBar.jsx';
 import TaskArea from './components/taskArea/taskArea.jsx'
 
-import './App.css'
+import '././components/styles/main.css';
+
 import React, { useState } from 'react';
 import ProjectContext from './contexts/selectedProjectState.js';
 
@@ -12,8 +13,19 @@ function App() {
     const [projects, setProjects] = useState([{_id: '1', projectName: 'carregando'}])
     const [selectedTask, setSelectedTask] = useState(null)
 
+    const contextValues = {
+        selectedProject, 
+        setSelectedProject, 
+        atualizarFetchTasks, 
+        setAtualizarFetchTasks, 
+        projects, 
+        setProjects, 
+        selectedTask, 
+        setSelectedTask
+    }
+
     return (
-        <ProjectContext.Provider value={{selectedProject, setSelectedProject, atualizarFetchTasks, setAtualizarFetchTasks, projects, setProjects, selectedTask, setSelectedTask}}>
+        <ProjectContext.Provider value={contextValues}>
             <div className="index">
                 <SideBar/>
                 <div id='contentArea'>

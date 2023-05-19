@@ -1,7 +1,5 @@
-//import React, { useState, useEffect, useRef } from 'react';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import Subtasks from './subtasks.jsx';
-import '../styles/taskArea.css'
 import ProjectContext from '../../contexts/selectedProjectState.js';
 
 export default function TaskArea({ selectedProject }) {

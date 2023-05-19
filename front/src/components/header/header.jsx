@@ -1,5 +1,3 @@
-import '../styles/header.css';
-import '../styles/menuOptions.css'
 import ThreeLine from '../../assets/images/three-line.svg';
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import Server from '../../configs/server.js'

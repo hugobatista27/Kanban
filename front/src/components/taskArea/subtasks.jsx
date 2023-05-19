@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import '../styles/subtasks.css';
 import InputArea from '../generic/testeInput.jsx';
 import Server from '../../configs/server.js';
 import ProjectContext from '../../contexts/selectedProjectState';
