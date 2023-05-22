@@ -17,7 +17,6 @@ export default function MenuOptionsTask({task}) {
             body: JSON.stringify(req)
         })
             .then(() => {
-                console.log('setaaaaaa')
                 setAtualizarFetchTasks(Math.random())
                 setSelectedTask(null)
             })

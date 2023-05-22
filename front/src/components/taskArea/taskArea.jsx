@@ -91,9 +91,6 @@ export default function TaskArea({ selectedProject }) {
                 {selectedTask && (
                     <div className='showInfoTask'>
                         <div ref={refSubtasks}>
-                            <button className='closeButton' onClick={closeTasks}>
-                                X
-                            </button>
                             <Subtasks task={selectedTask} status={allTasks.status} index={indexOfSelectedTask} id={selectedProject._id}/>
                         </div>
                     </div>

@@ -85,6 +85,7 @@
 .sideBar {
   max-width: 250px;
   height: 100vh;
+  transition: transform 0.3s ease;
   background-color: #2c2c38;
   border-right: 1px solid #575757;
 }
@@ -352,6 +353,14 @@
 }
 .showInfoTask .boxInfoTask input[type=text] {
   width: 100%;
+}
+
+.open {
+  transform: translateX(0);
+}
+
+.closed {
+  transform: translateX(-100%);
 }
 
 body {
