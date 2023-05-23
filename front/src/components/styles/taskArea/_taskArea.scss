@@ -12,8 +12,15 @@
     gap: 24px;
     padding: 20px;
 
+    overflow: overlay;
+    white-space: nowrap;
+
     &>.colluns{
-        width: 33%;
+        //width: 33%;
+
+        .cardWrapper {
+            width: 200px;
+        }
     }
 
     &>.colluns > p {

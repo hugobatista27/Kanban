@@ -6,7 +6,6 @@
 
 .sideBar {
     max-width: 250px;
-    height: 100vh;
     transition: transform 0.3s ease;
 
     background-color: config.$color-header;
@@ -35,9 +34,8 @@
             width: 230px;
             button {
                 padding: 10px;
-                rotate: -90deg;
                 &:hover {
-                    rotate: 0deg;
+                    rotate: 90deg;
                     transition: 0.5s;
                 }
             }
@@ -104,4 +102,34 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     color: config.$color-fontSub;        
+}
+
+.showSideBar {
+    width: 30px;
+    background-color: transparent;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1
+}
+
+
+@media screen and (min-width: 600px) {
+    .sideBar {
+        height: 100vh;
+
+    }
+
+}
+
+// mobile
+@media screen and (max-width: 599px) {
+    .sideBar {
+        position: absolute;
+        top: config.$height-header;
+        z-index: 1;
+
+        height: calc(100vh - 97px);
+    }
 }

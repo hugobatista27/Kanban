@@ -44,7 +44,7 @@ export default function InputArea({tag, content, setNewContent}) {
                 value={text}
             ></input>
         )
-    } 
+    }
 
     return (
         <>

@@ -1,11 +1,12 @@
 import ThreeLine from '../../assets/images/three-line.svg';
+import Logo from '../../assets/images/Vectorlogo.svg'
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import Server from '../../configs/server.js'
 import ProjectContext from '../../contexts/selectedProjectState';
 import MenuOptions from './menuOptions';
 
 function Header() {
-	const {selectedProject, setSelectedProject, setAtualizarFetchTasks} = useContext(ProjectContext)
+	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, isMobile, showSideBar} = useContext(ProjectContext)
 
 	const [showMenuOptions, setShowMenuOptions] = useState(false) 
 	const refMenuOptions = useRef(null)
@@ -48,12 +49,17 @@ function Header() {
 
 	return (
 		<div className="header">
-			<EditableTitle project={selectedProject} setProjectTitle={setSelectedProject} />
+			<div className='boxLogoMobile'>
+				{!showSideBar && (
+					<img src={Logo}></img>
+				)}
+				<EditableTitle project={selectedProject} setProjectTitle={setSelectedProject} />	
+			</div>
 			<div className="options">
 				<button 
 					className="newTask"
 					onClick={newProject}>
-					+Add new task
+					{isMobile ? '+' : '+Add new task'}
 				</button>
 				<div className='containerMenuOptions'>
 					<button 

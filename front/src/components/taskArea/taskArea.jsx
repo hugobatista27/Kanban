@@ -61,7 +61,7 @@ export default function TaskArea({ selectedProject }) {
             </div>
         )
     } else {
-        return (
+        return (            
             <div className='centerObjects'>
                 <div className='taskArea'>
                     {allTasks.status.map((coluna) => {
