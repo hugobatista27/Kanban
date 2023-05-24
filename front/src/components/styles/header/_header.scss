@@ -4,7 +4,7 @@
 .header {
     height: config.$height-header;
     width: 100%;
-    padding: 24px;
+    padding: 0 24px;
 
     @include config.flex(space-between, center);
     background-color: config.$color-header;
@@ -58,6 +58,8 @@
 
 @media screen and (max-width: 599px) {
     .header {
+        height: calc(config.$height-header - 10px);
+
         .newTask{
             @include config.flex(center, center);
     

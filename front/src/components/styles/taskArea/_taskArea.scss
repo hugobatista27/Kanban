@@ -2,12 +2,9 @@
 
 .centerObjects {
     position: relative;
-    height: 85%;
 }
 
 .taskArea {
-    max-height: 100%;
-
     display: flex;
     gap: 24px;
     padding: 20px;
@@ -48,6 +45,7 @@
         }
 
         .taskName {
+            white-space: normal;
             font-weight: 400;
             font-size: 17px;
             letter-spacing: -5.5%;
@@ -70,11 +68,11 @@
 }
 
 .showInfoTask {
-    position: absolute;
+/*     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+ */
     .boxInfoTask {
         display: flex;
         flex-direction: column;
@@ -82,7 +80,6 @@
     
         box-sizing: border-box;
     
-        width: 480px;
         padding: 35px 30px;
     
         background-color: config.$color-header;
@@ -214,6 +211,38 @@
         }
         input[type="text"]{
             width: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .taskArea {
+        height: calc(100vh - config.$height-header);
+    }
+
+    .showInfoTask {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .boxInfoTask {
+            width: 480px;
+        }
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .taskArea {
+        height: calc(100vh - config.$height-header + 10px);
+    }
+    .showInfoTask {
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .boxInfoTask {
+            margin: 25px;
         }
     }
 }

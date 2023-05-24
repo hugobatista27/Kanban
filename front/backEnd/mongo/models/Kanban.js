@@ -19,7 +19,6 @@ const tasksSchema = new mongoose.Schema({
     subtasks: [subtaskSchema]
 })
 
-
 const kanbanSchema = new mongoose.Schema({
     projectName: {type: String},
     description: {type: String},
@@ -27,7 +26,9 @@ const kanbanSchema = new mongoose.Schema({
     tasks: [tasksSchema]
 })
 
-module.exports = mongoose.model('Kanban', kanbanSchema)
+let DB = mongoose.connection.useDb('kanban');
+
+module.exports = DB.model('kanban', kanbanSchema);
 
 const exemplo = {
     projectName: {type: String},

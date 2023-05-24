@@ -48,7 +48,7 @@
 
         p, #areaProjectsButton > button, #labelNewElement, .buttonNewBoard {
             height: 48px;
-            width: 230px;
+            width: 229px;
             padding-left: 34px;
             margin-right: 20px;
         
@@ -69,10 +69,14 @@
             padding: 10px 0;            
         }
 
-        ul > button {
-            color: config.$color-fontSub;
-            &:hover {
-                color: config.$color-fontMain
+        ul {
+            overflow: auto;
+            max-height: calc(100vh - 48px - 48px - 97px); // 48 siginifica o tamanho dos botões de novo projeto e quantidade de projetos
+            & > button {
+                color: config.$color-fontSub;
+                &:hover {
+                    color: config.$color-fontMain
+                }
             }
         }
 
@@ -127,9 +131,9 @@
 @media screen and (max-width: 599px) {
     .sideBar {
         position: absolute;
-        top: config.$height-header;
+        top: calc(config.$height-header - 10px);
         z-index: 1;
 
-        height: calc(100vh - 97px);
+        height: calc(100vh - config.$height-header + 10px);
     }
 }

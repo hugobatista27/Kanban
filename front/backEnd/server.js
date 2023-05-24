@@ -1,22 +1,25 @@
 const mongoose = require('mongoose');
+
 const express = require('express');
 const cors = require('cors');
+
 const app = express();
 const bodyParser = require('body-parser');
 const linkRoute = require('./routes/linkRoutes.js')
 const port = 3001;
+const MONGO_CONNECTION_STRING = 'mongodb+srv://hugobatista:wivQSwZhU6SWQocg@cluster0.rnh7b3r.mongodb.net/'
 
 
-mongoose.connect('mongodb://localhost:27017/kanban', {
+mongoose.connect(MONGO_CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4
 })
 
-let db = mongoose.connection;
+let DB = mongoose.connection.useDb('kanban');
 
-db.on('error',() => {console.log("Houve um Erro")});
-db.once('open', () => {console.log("Banco carregado")});
+DB.on('error',() => {console.log("Houve um Erro")});
+DB.once('open', () => {console.log("Banco carregado")});
 
 app.use(cors());
 app.use(bodyParser.json());
