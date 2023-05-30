@@ -5,6 +5,7 @@ import ProjectContext from '../../contexts/selectedProjectState';
 import TrashIcon from '../../assets/images/trash-icon.svg'
 import ThreeLine from '../../assets/images/three-line.svg';
 import MenuOptionsTask from './menuOptionsTasks.jsx';
+import { useClickOutside } from '../generic/useClickOutside.js';
 
 
 export default function Subtasks({task, status, id, index}) {
@@ -106,19 +107,9 @@ export default function Subtasks({task, status, id, index}) {
         }
     }, [displayNewSubtask])
 
-    useEffect(() => {
-		function handleClickOutside(event) {
-			if (refMenuOptionsTask.current && !refMenuOptionsTask.current.contains(event.target)) {
-				setShowOptions(false);
-			}
-		}
-	
-		document.addEventListener('mousedown', handleClickOutside);
-	
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [refMenuOptionsTask])
+    useClickOutside(refMenuOptionsTask, () => {
+        setShowOptions(false);
+    })
 
     return (
         <div className="boxInfoTask">
@@ -131,7 +122,9 @@ export default function Subtasks({task, status, id, index}) {
                         >
                         <img src={ThreeLine} alt="options" />
                     </button>
-                    <div ref={refMenuOptionsTask} className={showOptions ? 'menuOptionsTask' : 'd-none'}>
+                    <div 
+                        ref={refMenuOptionsTask} 
+                        className={showOptions ? 'menuOptionsTask' : 'd-none'}>
                         <MenuOptionsTask task={task}/>
                     </div>
                 </div>

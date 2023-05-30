@@ -4,6 +4,7 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import Server from '../../configs/server.js'
 import ProjectContext from '../../contexts/selectedProjectState';
 import MenuOptions from './menuOptions';
+import { useClickOutside } from '../generic/useClickOutside';
 
 function Header() {
 	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, isMobile, showSideBar} = useContext(ProjectContext)
@@ -13,6 +14,8 @@ function Header() {
 
 	const newProject = () => {
 		const modelNewTask = {
+			//userCollectionName: 
+
 			id: selectedProject._id,
 			newTask: {
 				taskName: "Título",
@@ -33,19 +36,9 @@ function Header() {
 		})
 	}
 
-	useEffect(() => {
-		function handleClickOutside(event) {
-			if (refMenuOptions.current && !refMenuOptions.current.contains(event.target)) {
-				setShowMenuOptions(false);
-			}
-		}
-	
-		document.addEventListener('mousedown', handleClickOutside);
-	
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [refMenuOptions])
+	useClickOutside(refMenuOptions, () => {
+        setShowMenuOptions(false);
+    })
 
 	return (
 		<div className="header">

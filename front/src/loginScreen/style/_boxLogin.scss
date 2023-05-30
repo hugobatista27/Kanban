@@ -1,0 +1,76 @@
+@use '../../global-teste' as config;
+
+@mixin buttonForm {
+    border: 1px solid black;
+    padding: 8px 22px;
+    border-radius: 30px;    
+}
+
+.positionBoxLogin {
+    @include config.flex(center, center);
+    width: 50%;
+}
+#boxLogin {
+    @include config.flex(center, center);
+    flex-direction: column;
+    gap: 30px;
+
+    width: 70%;
+    padding: 35px;
+    border: 1px solid black;
+    border-radius: 16px;
+
+    .logo{
+        @include config.flex(center, center);
+        gap: 10px;
+    }
+    .formLogin, .formRegister {
+        @include config.flex(center, center);
+        flex-direction: column;
+        gap: 12px;
+
+        width: 90%;
+
+        input {
+            @include buttonForm();
+            width: 100%;
+            &:hover {
+                border: 1px solid config.$color-emphasis;
+            }
+            &.borderColorSucess{
+                border: 1px solid rgb(17, 207, 17);
+            }
+            &.borderColorNotSucess{
+                border: 1px solid rgb(255, 0, 0);
+            }
+        }
+
+        button {
+            @include buttonForm();
+
+            width: 100%;
+            background-color: black;
+            color: white;
+
+            &:hover {
+                transform: scale(1.04);
+                border: 2px solid config.$color-emphasis;
+            }
+        }
+    }
+    .registerLink {
+        @include config.flex(center, center);
+        gap: 5px;
+        p, button {
+            font-size: 15px;
+            height: 20px;
+        }
+        button {
+            color: blue;
+            text-decoration: underline;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

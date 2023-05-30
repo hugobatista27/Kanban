@@ -3,6 +3,7 @@ import ProjectContext from '../../contexts/selectedProjectState.js';
 import OptionsSideBar from './optionsSideBar.jsx'
 import Logo from '../../assets/images/Vectorlogo.svg'
 import Seta from '../../assets/images/seta.svg'
+import { useClickOutside } from '../generic/useClickOutside.js';
 
 function SideBar() {
     const {selectedProject, setSelectedProject} = useContext(ProjectContext)
@@ -32,6 +33,12 @@ function SideBar() {
     const closeSideBar = () => {
         setShowSideBar(false)
     }
+
+    useClickOutside(refSideBar, () => {
+        if (isMobile) {
+            setShowSideBar(false);            
+        }
+    })
 
     if (!isMobile) {
         return (

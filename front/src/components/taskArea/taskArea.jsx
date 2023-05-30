@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import Subtasks from './subtasks.jsx';
 import ProjectContext from '../../contexts/selectedProjectState.js';
+import { useClickOutside } from '../generic/useClickOutside.js';
 
 export default function TaskArea({ selectedProject }) {
     const [allTasks, setAllTasks] = useState(null);
@@ -36,23 +37,9 @@ export default function TaskArea({ selectedProject }) {
         setSelectedTask(task);
     };
 
-    const closeTasks = () => {
+    useClickOutside(refSubtasks, () => {
         setSelectedTask(null);
-    };
-
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (refSubtasks.current && !refSubtasks.current.contains(event.target)) {
-                closeTasks();
-            }
-        }
-
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [refSubtasks]);
+    })
 
     if (allTasks == null) {
         return (

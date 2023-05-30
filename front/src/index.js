@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './components/styles/main.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import IndexLoginScreen from './index.jsx'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <IndexLoginScreen />
   </React.StrictMode>
 );
 

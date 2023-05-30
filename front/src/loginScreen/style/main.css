@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;700;900&display=swap");
+header#welcome {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+}
+header#welcome .logo {
+  display: flex;
+  justify-content: none;
+  align-items: center;
+  gap: 10px;
+  height: 77px;
+  padding: 0 24px;
+}
+
+.positionBoxLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+#boxLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  width: 70%;
+  padding: 35px;
+  border: 1px solid black;
+  border-radius: 16px;
+}
+#boxLogin .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#boxLogin .formLogin, #boxLogin .formRegister {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  width: 90%;
+}
+#boxLogin .formLogin input, #boxLogin .formRegister input {
+  border: 1px solid black;
+  padding: 8px 22px;
+  border-radius: 30px;
+  width: 100%;
+}
+#boxLogin .formLogin input:hover, #boxLogin .formRegister input:hover {
+  border: 1px solid #655dca;
+}
+#boxLogin .formLogin input.borderColorSucess, #boxLogin .formRegister input.borderColorSucess {
+  border: 1px solid rgb(17, 207, 17);
+}
+#boxLogin .formLogin input.borderColorNotSucess, #boxLogin .formRegister input.borderColorNotSucess {
+  border: 1px solid rgb(255, 0, 0);
+}
+#boxLogin .formLogin button, #boxLogin .formRegister button {
+  border: 1px solid black;
+  padding: 8px 22px;
+  border-radius: 30px;
+  width: 100%;
+  background-color: black;
+  color: white;
+}
+#boxLogin .formLogin button:hover, #boxLogin .formRegister button:hover {
+  transform: scale(1.04);
+  border: 2px solid #655dca;
+}
+#boxLogin .registerLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+#boxLogin .registerLink p, #boxLogin .registerLink button {
+  font-size: 15px;
+  height: 20px;
+}
+#boxLogin .registerLink button {
+  color: blue;
+  text-decoration: underline;
+}
+#boxLogin .registerLink button:hover {
+  cursor: pointer;
+}
+
+#boxSlogan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 50%;
+  padding: 40px;
+}
+#boxSlogan .slogan {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 25px;
+  width: 50%;
+  text-align: right;
+}
+#boxSlogan .slogan li {
+  font-weight: 700;
+  font-size: 30px;
+}
+#boxSlogan .slogan p {
+  font-weight: 700;
+  font-size: 20px;
+  color: #6D6D6D;
+}
+#boxSlogan img {
+  margin-right: 30px;
+}
+
+* {
+  color: black;
+}
+
+main.welcome {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}/*# sourceMappingURL=main.css.map */

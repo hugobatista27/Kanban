@@ -1,0 +1,12 @@
+@use '../../global-teste' as config;
+@import './header';
+@import './boxLogin';
+@import './slogan';
+
+* {
+    color: black;
+}
+
+main.welcome {
+    @include config.flex(space-around, center);
+}

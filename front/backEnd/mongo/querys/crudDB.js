@@ -1,4 +1,9 @@
-const Kanban = require('../models/Kanban.js')
+const Schema = require('../models/Kanban.js');
+const mongoose = require('mongoose');
+const DB = mongoose.connection.useDb('kanban');
+const Model = (userProject) => {
+    return DB.model(userProject, Schema);
+}
 
 const kanbanSchema = {
     projectName: 'Primerio Teste',
@@ -29,6 +34,7 @@ function modelNewProject(name) {
 
 const CRUD = {
     addNewProject: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
         let project = new Kanban(modelNewProject(req.body.name))
         try {
             let doc = await project.save();
@@ -39,6 +45,7 @@ const CRUD = {
     },
 
     addNewTask: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
         try {
             let project = await Kanban.findById(req.body.id)
             project.tasks.push(req.body.newTask)
@@ -50,20 +57,26 @@ const CRUD = {
     },
 
     getAllData: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
+
         try {
-            let itens = await Kanban.find();
+            let itens = await Kanban(req.body.kanban).find();
             res.send(itens)
         } catch (error) {
             res.send(error)
         } 
     },
 
-    getProjectNameAndId: async() => {
+    getProjectNameAndId: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
+
         let itens = await Kanban.find({}, {projectName: 1, id: 1})
         return itens
     },
 
     getProjectById: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
+
         try {
             let item = await Kanban.findById(req.params.id)
             res.send(item)
@@ -73,6 +86,8 @@ const CRUD = {
     },
 
     updateTasks: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
+
         try {
             const task = req.body.tasks
             const id = req.body._id
@@ -94,6 +109,8 @@ const CRUD = {
 
 
     updateTitle: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
+
         try {
             const newTitle = req.body.projectName;
             const id = req.body._id;
@@ -110,6 +127,8 @@ const CRUD = {
     },
 
     deleteById: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
+
         try {
             let iten = await Kanban.findByIdAndDelete(req.params.id)
             res.send('item excluído')
@@ -119,6 +138,8 @@ const CRUD = {
     },
 
     deleteTask: async(req, res) => {
+        let Kanban = Model(req.body.userCollectionName)
+
         try {
             let project = await Kanban.findById(req.params.id)
             project.tasks = project.tasks.filter((task) => {

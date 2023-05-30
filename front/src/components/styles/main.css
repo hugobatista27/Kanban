@@ -230,6 +230,7 @@
 }
 .centerObjects {
   position: relative;
+  background-color: #21212D;
 }
 
 .taskArea {
@@ -277,13 +278,6 @@
   color: #8E9099;
 }
 
-.showInfoTask {
-  /*     position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-   */
-}
 .showInfoTask .boxInfoTask {
   display: flex;
   flex-direction: column;
@@ -456,7 +450,8 @@ body {
   font-family: "Nunito Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #21212D;
+  /*         background-color: $color-tasks;
+   */
 }
 
 * {
