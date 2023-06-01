@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import Server from "../../configs/server.js";
 import ProjectContext from "../../contexts/selectedProjectState.js";
+import UserLogged from '../../contexts/userLogged';
 
 export default function MenuOptionsTask({task}) {
     const {selectedProject, setAtualizarFetchTasks, setSelectedTask} = useContext(ProjectContext)
+    const {idUser} = useContext(UserLogged);
 
     const deleteTask = () => {
         const req = {
@@ -14,7 +16,7 @@ export default function MenuOptionsTask({task}) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(req)
+            body: JSON.stringify({...req, ...idUser})
         })
             .then(() => {
                 setAtualizarFetchTasks(Math.random())

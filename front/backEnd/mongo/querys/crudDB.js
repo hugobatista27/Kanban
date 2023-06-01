@@ -32,9 +32,20 @@ function modelNewProject(name) {
     return model
 }
 
+async function firstProjectToNewUsers(collectionName) {
+    let Kanban = Model(collectionName, Schema)
+    let project = new Kanban(modelNewProject('New Project'))
+    try {
+        let doc = await project.save();
+        return doc
+    } catch (error) {
+        return error;
+    }
+}
+
 const CRUD = {
     addNewProject: async(req, res) => {
-        let Kanban = Model(req.body.userCollectionName)
+        let Kanban = Model(req.body.userCollectionName, Schema)
         let project = new Kanban(modelNewProject(req.body.name))
         try {
             let doc = await project.save();
@@ -68,15 +79,20 @@ const CRUD = {
     },
 
     getProjectNameAndId: async(req, res) => {
-        let Kanban = Model(req.body.userCollectionName)
+        let Kanban = Model(req.body.userCollectionName, Schema)
 
-        let itens = await Kanban.find({}, {projectName: 1, id: 1})
-        return itens
+        try {
+            let itens = await Kanban.find({}, {projectName: 1, id: 1})
+            res.send(itens)
+            
+        } catch (error) {
+            console.log(error)
+        }
     },
 
     getProjectById: async(req, res) => {
         let Kanban = Model(req.body.userCollectionName)
-
+        
         try {
             let item = await Kanban.findById(req.params.id)
             res.send(item)

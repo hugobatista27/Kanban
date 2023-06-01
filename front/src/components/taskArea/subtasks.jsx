@@ -6,9 +6,10 @@ import TrashIcon from '../../assets/images/trash-icon.svg'
 import ThreeLine from '../../assets/images/three-line.svg';
 import MenuOptionsTask from './menuOptionsTasks.jsx';
 import { useClickOutside } from '../generic/useClickOutside.js';
-
+import UserLogged from '../../contexts/userLogged';
 
 export default function Subtasks({task, status, id, index}) {
+    const {idUser} = useContext(UserLogged);
     const [subtasks, setSubtasks] = useState(task.subtasks);
 
     const [newSubtasks, setNewSubtasks] = useState(task.subtasks)
@@ -44,7 +45,7 @@ export default function Subtasks({task, status, id, index}) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({_id: id, index: index, tasks: newTask})
+                body: JSON.stringify({_id: id, index: index, tasks: newTask, ...idUser})
             })
             .then((res) => res.json())
             .then((data) => {

@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef, memo } from 'react';
 import ProjectContext from '../../contexts/selectedProjectState.js';
-import OptionsSideBar from './optionsSideBar.jsx'
+import UserLogged from '../../contexts/userLogged.js';
+import {createNewProject, OptionsSideBar} from './optionsSideBar.jsx'
 import Logo from '../../assets/images/Vectorlogo.svg'
 import Seta from '../../assets/images/seta.svg'
 import { useClickOutside } from '../generic/useClickOutside.js';
@@ -9,17 +10,40 @@ function SideBar() {
     const {selectedProject, setSelectedProject} = useContext(ProjectContext)
     const {projects, setProjects} = useContext(ProjectContext)
     const {showSideBar, setShowSideBar, isMobile} = useContext(ProjectContext);
+    const {idUser} = useContext(UserLogged);
     const refSideBar = useRef();
 
+    const [functionGetProjectsInProgress, setFunctionGetProjectsInProgress] = useState(false);
+
+    let n = 0
+    useEffect(() => {
+        console.log(n++)
+    }, [functionGetProjectsInProgress])
     const getProjects = async() => {
-        fetch('http://192.168.3.11:3001/projectsName')
+        if (functionGetProjectsInProgress) {
+            return;
+        }
+
+        setFunctionGetProjectsInProgress(true)
+        return fetch('http://192.168.3.11:3001/projectsName', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(idUser)
+        })
             .then(response => response.json())
-            .then(data => setProjects(data))
+            .then((data) => {
+                setFunctionGetProjectsInProgress(false)
+                return data
+            })
             .catch(error => console.error(error))
     }
     
     useEffect(() => {
-        getProjects();
+        if(!functionGetProjectsInProgress) {
+            getProjects().then((data) => data ? setProjects(data) : '');
+        }
     }, [selectedProject])
 
     useEffect(() => {
@@ -40,7 +64,7 @@ function SideBar() {
         }
     })
 
-    if (!isMobile) {
+    if (!isMobile && projects) {
         return (
             <>
                 <div ref={refSideBar} className={`sideBar ${showSideBar ? 'open' : 'closed'}`}>
@@ -66,7 +90,7 @@ function SideBar() {
             </>
         );
     }
-    if (isMobile) {
+    if (isMobile && projects) {
         return (
             <>
                 <div ref={refSideBar} className={`sideBar ${showSideBar ? 'open' : 'closed'}`}>
@@ -89,4 +113,4 @@ function SideBar() {
     }
 }
 
-export default SideBar;
+export default SideBar; 

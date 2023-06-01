@@ -2,25 +2,50 @@ import React, { useState, useContext, useEffect } from 'react';
 import iconBoard from '../../assets/images/icon-board.svg'
 import Server from '../../configs/server'
 import ProjectContext from '../../contexts/selectedProjectState.js';
+import UserLogged from '../../contexts/userLogged';
 
+export async function createNewProject(name, idUser){
+    return fetch(`${Server.newProject}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: name, ...idUser})
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        return {
+            projectName: data.projectName,
+            _id: data._id
+        }
+    })
+}
 
-export default function OptionsSideBar({buttons, setSelectedProject}) {
+export function OptionsSideBar({buttons, setSelectedProject}) {
     const [isSelected, setIsSelected] = useState('')
     const {selectedProject} = useContext(ProjectContext)
+    const {idUser} = useContext(UserLogged);
 
     useEffect(() => {
         if (selectedProject) {
-            changeState(selectedProject)   
+            changeState(selectedProject)
         }
     }, [selectedProject])
 
     function changeState(project) {
-    setSelectedProject(project)
+        setSelectedProject(project)
         if(isSelected !== project._id){
             // setTimeOut provisório
             setTimeout(() => {
                 document.getElementById(project._id).classList.toggle('selected');
+
             }, 100);
+            /* try {
+            } catch (error) {
+                setTimeout(() => {
+                    changeState(project)
+                }, 100);
+            } */
             if (isSelected) {
                 document.getElementById(isSelected).classList.toggle('selected');                
             }
@@ -35,7 +60,7 @@ export default function OptionsSideBar({buttons, setSelectedProject}) {
 
     const addNewProject = async(target) => {
         if(target.value !== '') {
-            fetch(`${Server.newProject}`, {
+            /* fetch(`${Server.newProject}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,7 +73,8 @@ export default function OptionsSideBar({buttons, setSelectedProject}) {
                         projectName: data.projectName,
                         _id: data._id
                     })
-                })
+                }) */
+            setSelectedProject(createNewProject(target.value, idUser))
         }
         document.getElementById('labelNewElement').classList.toggle('d-none')
     }

@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import ProjectContext from "../../contexts/selectedProjectState";
 import Server from '../../configs/server.js';
+import UserLogged from "../../contexts/userLogged";
 
 function MenuOptions() {
+    const {idUser} = useContext(UserLogged)
     const {selectedProject, setSelectedProject, setAtualizarFetchTasks, projects} = useContext(ProjectContext)
 
     const deleteProject = () => {
@@ -10,7 +12,8 @@ function MenuOptions() {
             method: "DELETE",
             headers: {
 				'Content-Type': 'application/json'
-			}
+			},
+            body: JSON.stringify(idUser)
         }).then(() => {
             window.alert("Projeto Excluído")
             let newArrayProjects = [...projects]

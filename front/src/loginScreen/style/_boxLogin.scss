@@ -31,6 +31,9 @@
 
         width: 90%;
 
+        label {
+            width: 100%;
+        }
         input {
             @include buttonForm();
             width: 100%;

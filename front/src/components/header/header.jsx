@@ -3,11 +3,13 @@ import Logo from '../../assets/images/Vectorlogo.svg'
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import Server from '../../configs/server.js'
 import ProjectContext from '../../contexts/selectedProjectState';
+import UserLogged from '../../contexts/userLogged';
 import MenuOptions from './menuOptions';
 import { useClickOutside } from '../generic/useClickOutside';
 
 function Header() {
-	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, isMobile, showSideBar} = useContext(ProjectContext)
+	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, isMobile, showSideBar} = useContext(ProjectContext);
+	const {idUser} = useContext(UserLogged)
 
 	const [showMenuOptions, setShowMenuOptions] = useState(false) 
 	const refMenuOptions = useRef(null)
@@ -30,7 +32,7 @@ function Header() {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(modelNewTask)
+			body: JSON.stringify({...modelNewTask, ...idUser})
 		}).then(() => {
 			setAtualizarFetchTasks(Math.random() * Math.random())
 		})

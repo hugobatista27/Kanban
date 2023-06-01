@@ -48,6 +48,9 @@ header#welcome .logo {
   gap: 12px;
   width: 90%;
 }
+#boxLogin .formLogin label, #boxLogin .formRegister label {
+  width: 100%;
+}
 #boxLogin .formLogin input, #boxLogin .formRegister input {
   border: 1px solid black;
   padding: 8px 22px;

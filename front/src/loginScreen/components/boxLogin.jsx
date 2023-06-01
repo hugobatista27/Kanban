@@ -1,7 +1,8 @@
 import Logo from '../../assets/images/Vectorlogo.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Routes } from '../../configs/userRoutes.js'
 import { Register, checkInfoUser } from './formRegister';
+import UserLogged from '../../contexts/userLogged';
 
 function BoxLogin() {
     const [isRegistered, setIsRegistered] = useState(false);
@@ -10,14 +11,15 @@ function BoxLogin() {
 }
 
 function Login({setIsRegistered}) {
+    const {idUser, setIdUser, isLogged, setIsLogged} = useContext(UserLogged)
     const [userInfoToLogin, setUserInfoToLogin] = useState({
         email: '',
         password: ''
     })
 
-    useEffect(() => {
-
-    }, [userInfoToLogin])
+   /*  useEffect(() => {
+        console.log(userInfoToLogin)
+    }, [userInfoToLogin]) */
 
     const validateUser = async(userInfo) => {
         const response = await fetch(Routes.getProject, {
@@ -30,10 +32,11 @@ function Login({setIsRegistered}) {
         .then((res) => res.json())
         .then(async (data) => {
             if(data.message === 'find'){
-                return 'find'
+                return data
             } else {
                 const checkInUse = await checkInfoUser('email', userInfo.email);
-                return checkInUse === 'inUse' ? 'inUse' : 'notFind'
+                data.message = checkInUse === 'inUse' ? 'inUse' : 'notFind'
+                return data
             }
         })
 
@@ -59,7 +62,16 @@ function Login({setIsRegistered}) {
                         onInput={(event) => {setUserInfoToLogin({...userInfoToLogin, password: event.currentTarget.value})}}
                     />
                     <button
-                        onClick={async () => console.log(await validateUser(userInfoToLogin))}
+                        onClick={async () => {
+                            let data = await validateUser(userInfoToLogin)
+                            let isValidate = data.message === 'find' ? true : false
+                            if(isValidate){
+                                setIdUser({userCollectionName: data._doc.login.email})
+                                setIsLogged(true);
+                            } else {
+                                console.log('Usuário não encontrado')
+                            }
+                        }}
                     >
                         Entrar
                     </button>
@@ -75,6 +87,5 @@ function Login({setIsRegistered}) {
         </div>
     )
 }
-
 
 export default BoxLogin;
