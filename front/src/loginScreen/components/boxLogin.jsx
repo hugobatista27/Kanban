@@ -16,7 +16,7 @@ function Login({setIsRegistered}) {
         email: '',
         password: ''
     })
-
+    const [emailInUse, setEmailInUse] = useState('default')
    /*  useEffect(() => {
         console.log(userInfoToLogin)
     }, [userInfoToLogin]) */
@@ -51,16 +51,34 @@ function Login({setIsRegistered}) {
                     <h2>Entrar no Kanban</h2>
                 </div>
                 <div className='formLogin'>
-                    <input
-                        type="text"
-                        placeholder='Email'
-                        onInput={(event) => {setUserInfoToLogin({...userInfoToLogin, email: event.currentTarget.value})}}
-                    />
-                    <input
-                        type="password"
-                        placeholder='Senha'
-                        onInput={(event) => {setUserInfoToLogin({...userInfoToLogin, password: event.currentTarget.value})}}
-                    />
+                    <label htmlFor="emailLogin">
+                        Email
+                        <input
+                            id='emailLogin'
+                            type="text"
+                            placeholder='exemplo@gmail.com'
+                            className={emailInUse !== 'default' ? emailInUse ? 'borderColorSucess': 'borderColorNotSucess': ''}
+                            onInput={(event) => {
+                                setUserInfoToLogin({...userInfoToLogin, email: event.currentTarget.value});
+                                if(emailInUse !== 'default'){setEmailInUse('default')}
+                            }}
+                        />
+                        {emailInUse !== 'default' ? emailInUse ? '': 'Nenhum usuário cadastrado com esse Email': ''}
+                    </label>
+                    <label htmlFor="passwordLogin">
+                        Senha
+                        <input
+                            id='passwordLogin'
+                            type="password"
+                            placeholder='Senha'
+                            className={emailInUse !== 'default' ? emailInUse ? 'borderColorNotSucess': '': ''}
+                            onInput={(event) => {
+                                setUserInfoToLogin({...userInfoToLogin, password: event.currentTarget.value})
+                                if(emailInUse !== 'default'){setEmailInUse('default')}
+                            }}
+                        />
+                        {emailInUse !== 'default' ? emailInUse ? 'Senha incorreta': '': ''}
+                    </label>
                     <button
                         onClick={async () => {
                             let data = await validateUser(userInfoToLogin)
@@ -69,7 +87,7 @@ function Login({setIsRegistered}) {
                                 setIdUser({userCollectionName: data._doc.login.email})
                                 setIsLogged(true);
                             } else {
-                                console.log('Usuário não encontrado')
+                                data.message === 'inUse' ? setEmailInUse(true) : setEmailInUse(false)
                             }
                         }}
                     >

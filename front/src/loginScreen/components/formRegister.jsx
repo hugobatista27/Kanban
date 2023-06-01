@@ -1,6 +1,7 @@
 import Logo from '../../assets/images/Vectorlogo.svg';
+import UserLogged from '../../contexts/userLogged';
 import { Routes } from '../../configs/userRoutes.js'
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext} from 'react';
 
 export async function checkInfoUser(infoType, infoValue) {
     let error = null
@@ -44,12 +45,14 @@ export function Register({setIsRegistered}) {
     const [formErrors, setFormErrors] = useState('');
     const [instructions, setInstructions] = useState({})
 
+    const {setIdUser, setIsLogged} = useContext(UserLogged);
+
     const instructionsMessage = (objErrors, key) => {
         switch (objErrors[key]) {
             case 'sucess':
-                return 'Correto';
+                return '';
             case 'empty':
-                return 'Campo obrigatório. Por favor, preencha-o';
+                return 'Campo obrigatório. Por favor, preencha-o.';
             case 'inUse':
                 return `Existe um usuário utilizando este ${key == 'userName' ? 'Nome' : 'Email'}`;
             case 'different':
@@ -71,8 +74,6 @@ export function Register({setIsRegistered}) {
     const classNameStatus = (value) => {
         return value ? value === 'sucess' ? 'borderColorSucess' : 'borderColorNotSucess' : ''
     }
-
-    
 
     const makeRegister = async() => {
         let errors = {
@@ -186,7 +187,8 @@ export function Register({setIsRegistered}) {
                         onClick={ async () => {
                             let resultRegister = await makeRegister();
                             if(resultRegister === 'registered') {
-                                // entrar automaticamente no projeto
+                                setIdUser(userEmail)
+                                setIsLogged(true)
                             } else {
                                 setFormErrors(resultRegister)
                             }
