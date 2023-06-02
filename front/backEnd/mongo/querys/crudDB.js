@@ -83,7 +83,7 @@ const CRUD = {
 
         try {
             let itens = await Kanban.find({}, {projectName: 1, id: 1})
-            res.send(itens)
+            res.send({...itens, message: itens.length == 0 ? 'empty' : 'sucess'})
             
         } catch (error) {
             console.log(error)

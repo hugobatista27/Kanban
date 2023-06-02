@@ -199,6 +199,10 @@
         .subtaskDescription {
             @include config.flex(space-between, none);
             width: 100%;
+            & > p {
+                width: 90%;
+                color: config.$color-fontMain;
+            }
         }
         .subtaskDescription > input {
             width: 90%;

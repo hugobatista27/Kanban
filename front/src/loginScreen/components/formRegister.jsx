@@ -2,6 +2,7 @@ import Logo from '../../assets/images/Vectorlogo.svg';
 import UserLogged from '../../contexts/userLogged';
 import { Routes } from '../../configs/userRoutes.js'
 import { useState, useEffect, useContext} from 'react';
+import { createNewProject } from '../../components/sideBar/optionsSideBar';
 
 export async function checkInfoUser(infoType, infoValue) {
     let error = null
@@ -45,7 +46,7 @@ export function Register({setIsRegistered}) {
     const [formErrors, setFormErrors] = useState('');
     const [instructions, setInstructions] = useState({})
 
-    const {setIdUser, setIsLogged} = useContext(UserLogged);
+    const {idUser, setIdUser, setIsLogged} = useContext(UserLogged);
 
     const instructionsMessage = (objErrors, key) => {
         switch (objErrors[key]) {
@@ -189,6 +190,7 @@ export function Register({setIsRegistered}) {
                             if(resultRegister === 'registered') {
                                 setIdUser(userEmail)
                                 setIsLogged(true)
+                                createNewProject('New Project', idUser)
                             } else {
                                 setFormErrors(resultRegister)
                             }

@@ -181,7 +181,8 @@
 }
 .sideBar .boards #labelNewElement > input {
   max-width: 160px;
-  padding: 10px 0;
+  padding: 10px 10px;
+  margin-right: 10px;
 }
 .sideBar .boards ul {
   overflow: auto;
@@ -412,6 +413,10 @@
   justify-content: space-between;
   align-items: none;
   width: 100%;
+}
+.showInfoTask .boxInfoTask .subtaskDescription > p {
+  width: 90%;
+  color: #ffffff;
 }
 .showInfoTask .boxInfoTask .subtaskDescription > input {
   width: 90%;

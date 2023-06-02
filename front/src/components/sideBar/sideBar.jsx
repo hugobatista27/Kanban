@@ -13,13 +13,10 @@ function SideBar() {
     const {showSideBar, setShowSideBar, isMobile} = useContext(ProjectContext);
     const {idUser} = useContext(UserLogged);
     const refSideBar = useRef();
+    const [repeatGetProjects, setRepeateGetProjects] = useState(null)
 
     const [functionGetProjectsInProgress, setFunctionGetProjectsInProgress] = useState(false);
-
-    let n = 0
-    useEffect(() => {
-        console.log(n++)
-    }, [functionGetProjectsInProgress])
+    
     const getProjects = async() => {
         if (functionGetProjectsInProgress) {
             return;
@@ -36,6 +33,7 @@ function SideBar() {
             .then(response => response.json())
             .then((data) => {
                 setFunctionGetProjectsInProgress(false)
+                console.log(data)
                 return data
             })
             .catch(error => console.error(error))
@@ -43,7 +41,7 @@ function SideBar() {
     
     useEffect(() => {
         if(!functionGetProjectsInProgress) {
-            getProjects().then((data) => data ? setProjects(data) : '');
+            getProjects().then((data) => data.message !== 'empty' ? setProjects(data.data) : setProjects([{_id: '1', projectName: 'Vazio'}]));
         }
     }, [selectedProject])
 
@@ -65,6 +63,13 @@ function SideBar() {
         }
     })
 
+    useEffect(() => {
+        if (repeatGetProjects) {
+            getProjects().then((data) => data.message !== 'empty' ? setProjects(data.data) : setProjects([{_id: '1', projectName: 'Vazio'}]));
+        }
+        setRepeateGetProjects(null)
+    }, [repeatGetProjects])
+    
     if (!isMobile && projects) {
         return (
             <>
@@ -81,7 +86,7 @@ function SideBar() {
                                 <img src={Seta} alt="ocultar menu lateral" />
                             </button>
                         </div>
-                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject}></OptionsSideBar>
+                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject} setRepeateGetProjects={setRepeateGetProjects}></OptionsSideBar>
                     </div>
                 </div>
                 <button 
@@ -103,7 +108,7 @@ function SideBar() {
                                 <img src={Seta} alt="ocultar menu lateral" />
                             </button>
                         </div>
-                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject}></OptionsSideBar>
+                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject} setRepeateGetProjects={setRepeateGetProjects}></OptionsSideBar>
                     </div>
                 </div>
                 <button className='showSideBar'
