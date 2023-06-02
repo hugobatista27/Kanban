@@ -3,6 +3,7 @@ import Subtasks from './subtasks.jsx';
 import ProjectContext from '../../contexts/selectedProjectState.js';
 import { useClickOutside } from '../generic/useClickOutside.js';
 import UserLogged from '../../contexts/userLogged';
+import Server from '../../configs/server.js';
 
 export default function TaskArea({ selectedProject }) {
     const {idUser} = useContext(UserLogged);
@@ -13,7 +14,7 @@ export default function TaskArea({ selectedProject }) {
     const {atualizarFetchTasks, selectedTask, setSelectedTask} = useContext(ProjectContext)
 
     const getProject = async () => {
-        fetch('http://192.168.3.11:3001/project/' + selectedProject._id, {
+        fetch(`${Server.selectProjectById}${selectedProject._id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

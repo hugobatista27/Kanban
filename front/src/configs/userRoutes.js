@@ -1,4 +1,4 @@
-const adressUsers = "http://192.168.3.11:3001/user";
+const adressUsers = "https://kanban-api-74tx.vercel.app/user";
 
 export const Routes = {
     registerUser: `${adressUsers}/register-user`,

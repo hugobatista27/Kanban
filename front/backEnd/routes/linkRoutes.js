@@ -5,15 +5,7 @@ const linkController = require('../mongo/querys/crudDB.js');
 
 app.use(express.json)
 
-router.get('/allProjects', linkController.getAllData);
-
-/* router.get('/projectsName', (req, res) => {
-    linkController.getProjectNameAndId()
-        .then((data) => {
-            res.setHeader('Content-Type', 'application/json'); 
-            res.status(200).send(JSON.stringify(data));
-        })
-}); */
+router.post('/allProjects', express.urlencoded({extended: true}), linkController.getAllData);
 
 router.post('/projectsName', express.urlencoded({extended: true}), linkController.getProjectNameAndId)
 

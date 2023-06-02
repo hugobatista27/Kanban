@@ -1,4 +1,4 @@
-const adress = "http://192.168.3.11:3001";
+const adress = "https://kanban-api-74tx.vercel.app";
 
 const Server = {
     allProjects: `${adress}/allProjects`,

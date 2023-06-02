@@ -5,6 +5,7 @@ import {createNewProject, OptionsSideBar} from './optionsSideBar.jsx'
 import Logo from '../../assets/images/Vectorlogo.svg'
 import Seta from '../../assets/images/seta.svg'
 import { useClickOutside } from '../generic/useClickOutside.js';
+import Server from '../../configs/server.js';
 
 function SideBar() {
     const {selectedProject, setSelectedProject} = useContext(ProjectContext)
@@ -25,7 +26,7 @@ function SideBar() {
         }
 
         setFunctionGetProjectsInProgress(true)
-        return fetch('http://192.168.3.11:3001/projectsName', {
+        return fetch(Server.projectNames, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -113,4 +114,4 @@ function SideBar() {
     }
 }
 
-export default SideBar; 
+export default memo(SideBar); 
