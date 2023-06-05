@@ -3,16 +3,21 @@ import Logo from '../../assets/images/Vectorlogo.svg'
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import Server from '../../configs/server.js'
 import ProjectContext from '../../contexts/selectedProjectState';
+import UserLogged from '../../contexts/userLogged';
 import MenuOptions from './menuOptions';
+import { useClickOutside } from '../generic/useClickOutside';
 
 function Header() {
-	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, isMobile, showSideBar} = useContext(ProjectContext)
+	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, isMobile, showSideBar} = useContext(ProjectContext);
+	const {idUser} = useContext(UserLogged)
 
 	const [showMenuOptions, setShowMenuOptions] = useState(false) 
 	const refMenuOptions = useRef(null)
 
 	const newProject = () => {
 		const modelNewTask = {
+			//userCollectionName: 
+
 			id: selectedProject._id,
 			newTask: {
 				taskName: "Título",
@@ -27,25 +32,15 @@ function Header() {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(modelNewTask)
+			body: JSON.stringify({...modelNewTask, ...idUser})
 		}).then(() => {
 			setAtualizarFetchTasks(Math.random() * Math.random())
 		})
 	}
 
-	useEffect(() => {
-		function handleClickOutside(event) {
-			if (refMenuOptions.current && !refMenuOptions.current.contains(event.target)) {
-				setShowMenuOptions(false);
-			}
-		}
-	
-		document.addEventListener('mousedown', handleClickOutside);
-	
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [refMenuOptions])
+	useClickOutside(refMenuOptions, () => {
+        setShowMenuOptions(false);
+    })
 
 	return (
 		<div className="header">

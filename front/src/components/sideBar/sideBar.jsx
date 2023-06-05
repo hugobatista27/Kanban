@@ -1,24 +1,48 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef, memo } from 'react';
 import ProjectContext from '../../contexts/selectedProjectState.js';
-import OptionsSideBar from './optionsSideBar.jsx'
+import UserLogged from '../../contexts/userLogged.js';
+import {createNewProject, OptionsSideBar} from './optionsSideBar.jsx'
 import Logo from '../../assets/images/Vectorlogo.svg'
 import Seta from '../../assets/images/seta.svg'
+import { useClickOutside } from '../generic/useClickOutside.js';
+import Server from '../../configs/server.js';
 
 function SideBar() {
     const {selectedProject, setSelectedProject} = useContext(ProjectContext)
     const {projects, setProjects} = useContext(ProjectContext)
     const {showSideBar, setShowSideBar, isMobile} = useContext(ProjectContext);
+    const {idUser} = useContext(UserLogged);
     const refSideBar = useRef();
+    const [repeatGetProjects, setRepeateGetProjects] = useState(null)
 
+    const [functionGetProjectsInProgress, setFunctionGetProjectsInProgress] = useState(false);
+    
     const getProjects = async() => {
-        fetch('http://192.168.3.11:3001/projectsName')
+        if (functionGetProjectsInProgress) {
+            return;
+        }
+
+        setFunctionGetProjectsInProgress(true)
+        return fetch(Server.projectNames, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(idUser)
+        })
             .then(response => response.json())
-            .then(data => setProjects(data))
+            .then((data) => {
+                setFunctionGetProjectsInProgress(false)
+                console.log(data)
+                return data
+            })
             .catch(error => console.error(error))
     }
     
     useEffect(() => {
-        getProjects();
+        if(!functionGetProjectsInProgress) {
+            getProjects().then((data) => data.message !== 'empty' ? setProjects(data.data) : setProjects([{_id: '1', projectName: 'Vazio'}]));
+        }
     }, [selectedProject])
 
     useEffect(() => {
@@ -33,7 +57,20 @@ function SideBar() {
         setShowSideBar(false)
     }
 
-    if (!isMobile) {
+    useClickOutside(refSideBar, () => {
+        if (isMobile) {
+            setShowSideBar(false);            
+        }
+    })
+
+    useEffect(() => {
+        if (repeatGetProjects) {
+            getProjects().then((data) => data.message !== 'empty' ? setProjects(data.data) : setProjects([{_id: '1', projectName: 'Vazio'}]));
+        }
+        setRepeateGetProjects(null)
+    }, [repeatGetProjects])
+    
+    if (!isMobile && projects) {
         return (
             <>
                 <div ref={refSideBar} className={`sideBar ${showSideBar ? 'open' : 'closed'}`}>
@@ -49,7 +86,7 @@ function SideBar() {
                                 <img src={Seta} alt="ocultar menu lateral" />
                             </button>
                         </div>
-                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject}></OptionsSideBar>
+                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject} setRepeateGetProjects={setRepeateGetProjects}></OptionsSideBar>
                     </div>
                 </div>
                 <button 
@@ -59,7 +96,7 @@ function SideBar() {
             </>
         );
     }
-    if (isMobile) {
+    if (isMobile && projects) {
         return (
             <>
                 <div ref={refSideBar} className={`sideBar ${showSideBar ? 'open' : 'closed'}`}>
@@ -71,7 +108,7 @@ function SideBar() {
                                 <img src={Seta} alt="ocultar menu lateral" />
                             </button>
                         </div>
-                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject}></OptionsSideBar>
+                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject} setRepeateGetProjects={setRepeateGetProjects}></OptionsSideBar>
                     </div>
                 </div>
                 <button className='showSideBar'
@@ -82,4 +119,4 @@ function SideBar() {
     }
 }
 
-export default SideBar;
+export default memo(SideBar); 

@@ -1,0 +1,28 @@
+@use '../../global-teste' as config;
+
+#boxSlogan {
+    @include config.flex(center, center);
+    gap: 30px;
+    width: 50%;
+    padding: 40px;
+    .slogan{
+        @include config.flex(flex-start, flex-end);
+        flex-direction: column;
+        gap: 25px;
+
+        width: 50%;
+        text-align: right;
+        li {
+            font-weight: 700;
+            font-size: 30px;
+        }
+        p {
+            font-weight: 700;
+            font-size: 20px;
+            color: #6D6D6D;
+        }
+    }
+    img{
+        margin-right: 30px;
+    }
+}

@@ -5,27 +5,32 @@
     height: config.$height-header;
     width: 100%;
     padding: 0 24px;
+    color: config.$color-fontMain;
 
     @include config.flex(space-between, center);
     background-color: config.$color-header;
     border-bottom: 1px solid #575757;
 
     .boxLogoMobile {
+        color: config.$color-fontMain;
         @include config.flex(center, center);
         gap: 20px;
 
         max-width: calc(100% - 200px);
     }
     h1, input {
+        color: inherit;
         font-weight: 700;
         font-size: 25px;
         letter-spacing: -0.01em;
     }
     .options {
+        color: inherit;
         @include config.flex(center, center);
         gap: 24px;
     }
     .newTask{
+        color: inherit;
         border-radius: 24px;
 
         background-color: config.$color-emphasis;

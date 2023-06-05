@@ -2,6 +2,7 @@
 
 .centerObjects {
     position: relative;
+    background-color: config.$color-tasks;
 }
 
 .taskArea {
@@ -13,14 +14,13 @@
     white-space: nowrap;
 
     &>.colluns{
-        //width: 33%;
-
         .cardWrapper {
             width: 200px;
         }
     }
 
     &>.colluns > p {
+        color: config.$color-fontMain;
         font-style: normal;
         font-weight: 700;
         font-size: 13px;
@@ -68,11 +68,6 @@
 }
 
 .showInfoTask {
-/*     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
- */
     .boxInfoTask {
         display: flex;
         flex-direction: column;
@@ -90,12 +85,14 @@
             @include config.flex(space-between, center);
 
             h2 {
+                color: config.$color-fontMain;
                 font-weight: 700;
                 font-size: 20px;
                 line-height: 23px;
                 letter-spacing: 0.03em;
             }
             button.optionsTask {
+                color: config.$color-fontMain;
                 width: 30px;
                 height: 30px;
                 border-radius: 50%;
@@ -110,6 +107,7 @@
             width: 100%;
         }
         .addSubtask > button {
+            color: config.$color-fontMain;
             width: 40px;
             height: 40px;
             border-radius: 25px;
@@ -129,6 +127,7 @@
             color: config.$color-fontSub;
         }
         h3 {
+            color: config.$color-fontMain;
             font-weight: 400;
             font-size: 18px;
             line-height: 154.9%;
@@ -183,6 +182,7 @@
             border: 1px solid config.$color-fontSub;
             border-radius: 7px;
         
+            color: config.$color-fontMain;
             font-weight: 400;
             font-size: 14px;
             line-height: 154.9%;
@@ -190,6 +190,7 @@
             letter-spacing: 0.095em;
         }
         option {
+            color: config.$color-fontMain;
             background-color: config.$color-tasks;
         }
         .changeText {
@@ -198,6 +199,10 @@
         .subtaskDescription {
             @include config.flex(space-between, none);
             width: 100%;
+            & > p {
+                width: 90%;
+                color: config.$color-fontMain;
+            }
         }
         .subtaskDescription > input {
             width: 90%;

@@ -5,17 +5,11 @@ const linkController = require('../mongo/querys/crudDB.js');
 
 app.use(express.json)
 
-router.get('/allProjects', linkController.getAllData);
+router.post('/allProjects', express.urlencoded({extended: true}), linkController.getAllData);
 
-router.get('/projectsName', (req, res) => {
-    linkController.getProjectNameAndId()
-        .then((data) => {
-            res.setHeader('Content-Type', 'application/json'); 
-            res.status(200).send(JSON.stringify(data));
-        })
-});
+router.post('/projectsName', express.urlencoded({extended: true}), linkController.getProjectNameAndId)
 
-router.get('/project/:id', linkController.getProjectById);
+router.post('/project/:id', express.urlencoded({extended: true}), linkController.getProjectById);
 
 router.put('/project/change-title', express.urlencoded({extended: true}), linkController.updateTitle);
 

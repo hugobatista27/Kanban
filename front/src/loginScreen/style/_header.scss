@@ -1,0 +1,14 @@
+@use '../../global-teste' as config;
+
+$height-header-here: config.$height-header - 20px;
+
+header#welcome {
+    @include config.flex(none, center);
+    .logo{
+        @include config.flex(none, center);
+        gap: 10px;
+
+        height: $height-header-here;
+        padding: 0 24px;
+    }
+}

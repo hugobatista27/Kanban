@@ -10,7 +10,7 @@ import ProjectContext from './contexts/selectedProjectState.js';
 function App() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [atualizarFetchTasks, setAtualizarFetchTasks] = useState(null);
-    const [projects, setProjects] = useState([{_id: '1', projectName: 'carregando'}]);
+    const [projects, setProjects] = useState([{_id: '1', projectName: 'Carregando...'}]);
     const [selectedTask, setSelectedTask] = useState(null);
     const [showSideBar, setShowSideBar] = useState(true);
     const [isMobile, setIsMobile] = useState(true)
@@ -41,7 +41,7 @@ function App() {
             setIsMobile(true)
             setShowSideBar(false)
         } 
-        if (windowWidth > 600) {
+        if (windowWidth >= 600) {
             setIsMobile(false)
             setShowSideBar(true)
         }
@@ -55,7 +55,7 @@ function App() {
                 )}
                 <div id='contentArea'
                     
-                    style={isMobile ? {width: 100 + '%'}: showSideBar ? {width: `calc(${100}% - ${250}px)`} : {width: 100+'%'}}>
+                    style={isMobile ? {width: 100 + '%'}: showSideBar ? {width: `calc(${100}% - ${250}px)`} : {width: 100+'%'} }> {/* provisório */}
                     <Header/>
                     {isMobile && (
                         <SideBar/>
@@ -64,6 +64,7 @@ function App() {
                 </div>
             </div>
         </ProjectContext.Provider>
-    );}
+    )
+}
 
 export default App;
