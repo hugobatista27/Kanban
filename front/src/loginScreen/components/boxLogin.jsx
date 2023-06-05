@@ -4,10 +4,14 @@ import { Routes } from '../../configs/userRoutes.js'
 import { Register, checkInfoUser } from './formRegister';
 import UserLogged from '../../contexts/userLogged';
 
-function BoxLogin() {
-    const [isRegistered, setIsRegistered] = useState(false);
+function BoxLogin({doLogin = 'none'}) {
+    const [isRegistered, setIsRegistered] = useState(!doLogin === 'none' ? true : doLogin ? true : false );
 
-    return (isRegistered ? <Login setIsRegistered={setIsRegistered}/> : <Register setIsRegistered={setIsRegistered}/>)
+    return (
+        isRegistered ? 
+        <Login setIsRegistered={setIsRegistered}/> : 
+        <Register setIsRegistered={setIsRegistered}/>
+    )
 }
 
 function Login({setIsRegistered}) {
@@ -17,9 +21,6 @@ function Login({setIsRegistered}) {
         password: ''
     })
     const [emailInUse, setEmailInUse] = useState('default')
-   /*  useEffect(() => {
-        console.log(userInfoToLogin)
-    }, [userInfoToLogin]) */
 
     const validateUser = async(userInfo) => {
         const response = await fetch(Routes.getProject, {

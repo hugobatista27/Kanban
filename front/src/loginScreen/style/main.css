@@ -99,7 +99,7 @@ header#welcome .logo {
     width: 50%;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   #boxLogin {
     width: 90%;
     padding: 20px;
@@ -172,6 +172,25 @@ header#welcome .logo {
     margin-right: 0;
     width: 50%;
     max-width: 160px;
+  }
+  .buttonsMobileLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .buttonsMobileLogin .buttonLogin, .buttonsMobileLogin .buttonRegister {
+    font-size: 20px;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+  .buttonsMobileLogin .buttonLogin:hover, .buttonsMobileLogin .buttonRegister:hover {
+    cursor: pointer;
+    border: 1px solid black;
+  }
+  .buttonsMobileLogin .buttonLogin {
+    background-color: #655dca;
+    color: #ffffff;
   }
 }
 * {

@@ -58,4 +58,27 @@
             max-width: 160px;
         }
     }
+
+    .buttonsMobileLogin {
+        @include config.flex(center, center);
+        gap: 10px;
+
+        .buttonLogin, .buttonRegister {
+            font-size: 20px;
+            padding: 5px 14px;
+            border-radius: 20px;
+
+            &:hover {
+                cursor: pointer;
+                border: 1px solid black;
+            }
+        }
+        .buttonLogin{
+            background-color: config.$color-emphasis;
+            color: config.$color-fontMain;
+        }
+        .buttonRegister{
+
+        }
+    }
 }

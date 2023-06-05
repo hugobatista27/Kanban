@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import App from "./App";
 import Welcome from "./loginScreen/Welcome";
 import UserLogged from "./contexts/userLogged";
@@ -14,6 +14,27 @@ export default function IndexLoginScreen() {
         idUser, setIdUser,
         isMobile, setIsMobile
     }
+
+    useEffect(() => {
+        var windowWidth = document.body.clientWidth;
+        if (windowWidth > 600) {
+            setIsMobile(false)
+        } else {
+            setIsMobile(true)
+        }
+    }, [])
+
+    window.addEventListener("resize", () => {
+        var windowWidth = document.body.clientWidth;
+        
+        if (windowWidth < 600) {
+            setIsMobile(true)
+        } 
+        if (windowWidth >= 600) {
+            setIsMobile(false)
+        }
+    })
+
 
     return (
         <UserLogged.Provider value={contextValues}>
