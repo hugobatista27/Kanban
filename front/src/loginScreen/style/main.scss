@@ -7,6 +7,14 @@
     color: black;
 }
 
-main.welcome {
-    @include config.flex(space-around, center);
+
+@media screen and (min-width: 600px) {
+    main.wellcome {
+        @include config.flex(space-around, center);
+        gap: 50px;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    
 }

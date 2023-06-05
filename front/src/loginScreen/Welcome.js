@@ -7,7 +7,7 @@ export default function Welcome() {
     return (
         <>
             <Header/>
-            <main className='welcome'>
+            <main className='wellcome'>
                 <BoxLogin/>
                 <Slogan/>
             </main>

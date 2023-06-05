@@ -6,10 +6,6 @@
     border-radius: 30px;    
 }
 
-.positionBoxLogin {
-    @include config.flex(center, center);
-    width: 50%;
-}
 #boxLogin {
     @include config.flex(center, center);
     flex-direction: column;
@@ -55,6 +51,7 @@
             width: 100%;
             background-color: black;
             color: white;
+            margin-top: 10px;
 
             &:hover {
                 transform: scale(1.04);
@@ -76,5 +73,25 @@
                 cursor: pointer;
             }
         }
+    }
+}
+
+@media screen and (min-width: 600px){
+    .positionBoxLogin {
+        @include config.flex(flex-end, center);
+        width: 50%;
+    }
+    #boxLogin {
+
+    }
+}
+
+@media screen and (max-width: 599px){
+    .positionBoxLogin {
+        @include config.flex(center, center);
+        width: 100%;
+    }
+    #boxLogin {
+        width: 90%;
     }
 }

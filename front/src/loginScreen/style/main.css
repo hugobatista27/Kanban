@@ -16,13 +16,6 @@ header#welcome .logo {
   padding: 0 24px;
 }
 
-.positionBoxLogin {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-}
-
 #boxLogin {
   display: flex;
   justify-content: center;
@@ -74,6 +67,7 @@ header#welcome .logo {
   width: 100%;
   background-color: black;
   color: white;
+  margin-top: 10px;
 }
 #boxLogin .formLogin button:hover, #boxLogin .formRegister button:hover {
   transform: scale(1.04);
@@ -97,21 +91,38 @@ header#welcome .logo {
   cursor: pointer;
 }
 
+@media screen and (min-width: 600px) {
+  .positionBoxLogin {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 599px) {
+  .positionBoxLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  #boxLogin {
+    width: 90%;
+  }
+}
 #boxSlogan {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: 30px;
-  width: 50%;
-  padding: 40px;
+  gap: 20px;
 }
 #boxSlogan .slogan {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
   flex-direction: column;
-  gap: 25px;
-  width: 50%;
+  gap: 10px;
+  max-width: 220px;
   text-align: right;
 }
 #boxSlogan .slogan li {
@@ -123,16 +134,36 @@ header#welcome .logo {
   font-size: 20px;
   color: #6D6D6D;
 }
-#boxSlogan img {
-  margin-right: 30px;
-}
 
+@media screen and (min-width: 600px) {
+  #boxSlogan {
+    width: 50%;
+  }
+  #boxSlogan img {
+    margin-right: 30px;
+    width: 50%;
+    max-width: 200px;
+  }
+}
+@media screen and (max-width: 599px) {
+  #boxSlogan {
+    width: 100%;
+    padding: 30px;
+  }
+  #boxSlogan img {
+    margin-right: 0;
+    width: 50%;
+  }
+}
 * {
   color: black;
 }
 
-main.welcome {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+@media screen and (min-width: 600px) {
+  main.wellcome {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50px;
+  }
 }/*# sourceMappingURL=main.css.map */
