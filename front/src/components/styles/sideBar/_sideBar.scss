@@ -1,0 +1,139 @@
+@use '../../../global-teste.scss' as config;
+
+.d-none{
+    display: none;
+}
+
+.sideBar {
+    max-width: 250px;
+    transition: transform 0.3s ease;
+
+    background-color: config.$color-header;
+    border-right: 1px solid #575757;
+
+    .divLogo {
+        height: config.$height-header;
+        padding-left: 34px;
+
+        @include config.flex(none, center);
+        gap: 14px;
+
+        img {
+            width: 24px;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+    }
+
+    .boards {
+        .boxCloseSideBar {
+            display: flex;
+            width: 230px;
+            button {
+                padding: 10px;
+                &:hover {
+                    rotate: 90deg;
+                    transition: 0.5s;
+                }
+            }
+        }
+
+        p, button {
+            @include config.flex(none, center);
+            gap: 16px
+        }
+
+        p, #areaProjectsButton > button, #labelNewElement, .buttonNewBoard {
+            height: 48px;
+            width: 229px;
+            padding-left: 34px;
+            margin-right: 20px;
+        
+            $radius: calc(48px/2);
+            border-radius: 0 $radius $radius 0;
+            
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;   
+        }
+
+        button, #labelNewElement {
+            cursor: pointer;
+        }
+
+        #labelNewElement > input{
+            max-width: 160px;
+            padding: 10px 0;            
+        }
+
+        ul {
+            overflow: auto;
+            max-height: calc(100vh - 48px - 48px - 97px); // 48 siginifica o tamanho dos botões de novo projeto e quantidade de projetos
+            & > button {
+                color: config.$color-fontSub;
+                &:hover {
+                    color: config.$color-fontMain
+                }
+            }
+        }
+
+        button {
+            font-size: 17px;
+        }
+
+        .selected {
+            background-color: config.$color-emphasis;
+            color: config.$color-fontMain;
+            font-weight: 700;
+        }
+
+        .boards img {
+            margin-right: 16px;
+        }
+
+        .buttonNewBoard {
+            color: config.$color-emphasis;
+            font-weight: 700;
+        }
+    }
+}
+
+.boards p, input{
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: config.$color-fontSub;        
+}
+
+.showSideBar {
+    width: 30px;
+    background-color: transparent;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1
+}
+
+
+@media screen and (min-width: 600px) {
+    .sideBar {
+        height: 100vh;
+
+    }
+
+}
+
+// mobile
+@media screen and (max-width: 599px) {
+    .sideBar {
+        position: absolute;
+        top: calc(config.$height-header - 10px);
+        z-index: 1;
+
+        height: calc(100vh - config.$height-header + 10px);
+    }
+}

@@ -1,25 +1,85 @@
+import React, { useEffect, useState, useContext, useRef } from 'react';
+import ProjectContext from '../../contexts/selectedProjectState.js';
 import OptionsSideBar from './optionsSideBar.jsx'
-import Svg from '../../assets/images/Vectorlogo.svg' // no react precisamos sempre importar as imagens
-import './sideBar.css'
-
-let allBoards = [
-    {title: "Platform Launch", id: 1, select: null}, {title: "Store", id: 2, select: null}
-];
+import Logo from '../../assets/images/Vectorlogo.svg'
+import Seta from '../../assets/images/seta.svg'
 
 function SideBar() {
-    let totalBoards = allBoards.length
-    return (
-        <div className='sideBar'>
-            <div className="divLogo">
-                <img src={Svg} alt="Logo" />
-                <h1>kanban</h1>
-            </div>
-            <div className='boards'>
-                <p>ALL BOARDS ({totalBoards})</p>
-                <OptionsSideBar buttons={allBoards}></OptionsSideBar>
-            </div>
-        </div>
-    );
+    const {selectedProject, setSelectedProject} = useContext(ProjectContext)
+    const {projects, setProjects} = useContext(ProjectContext)
+    const {showSideBar, setShowSideBar, isMobile} = useContext(ProjectContext);
+    const refSideBar = useRef();
+
+    const getProjects = async() => {
+        fetch('http://192.168.3.11:3001/projectsName')
+            .then(response => response.json())
+            .then(data => setProjects(data))
+            .catch(error => console.error(error))
+    }
+    
+    useEffect(() => {
+        getProjects();
+    }, [selectedProject])
+
+    useEffect(() => {
+        if (!showSideBar) {
+            setTimeout(() => {
+                refSideBar.current.classList.toggle('d-none')
+            }, 100)    
+        }
+    }, [showSideBar])
+
+    const closeSideBar = () => {
+        setShowSideBar(false)
+    }
+
+    if (!isMobile) {
+        return (
+            <>
+                <div ref={refSideBar} className={`sideBar ${showSideBar ? 'open' : 'closed'}`}>
+                    <div className="divLogo">
+                        <img src={Logo} alt="Logo" />
+                        <h1>kanban</h1>
+                    </div>
+                    <div className='boards'>
+                        <div className='boxCloseSideBar'>
+                            <p>ALL BOARDS ({projects.length})</p>
+                            <button
+                                onClick={closeSideBar}>
+                                <img src={Seta} alt="ocultar menu lateral" />
+                            </button>
+                        </div>
+                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject}></OptionsSideBar>
+                    </div>
+                </div>
+                <button 
+                    className='showSideBar'
+                    onMouseOver={() => setShowSideBar(true)}>
+                </button>
+            </>
+        );
+    }
+    if (isMobile) {
+        return (
+            <>
+                <div ref={refSideBar} className={`sideBar ${showSideBar ? 'open' : 'closed'}`}>
+                    <div className='boards'>
+                        <div className='boxCloseSideBar'>
+                            <p>ALL BOARDS ({projects.length})</p>
+                            <button
+                                onClick={closeSideBar}>
+                                <img src={Seta} alt="ocultar menu lateral" />
+                            </button>
+                        </div>
+                        <OptionsSideBar buttons={projects} setSelectedProject={setSelectedProject}></OptionsSideBar>
+                    </div>
+                </div>
+                <button className='showSideBar'
+                    onClick={() => showSideBar ? setShowSideBar(false) : setShowSideBar(true)}>
+                </button>
+            </>
+        );    
+    }
 }
 
 export default SideBar;

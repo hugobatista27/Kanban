@@ -1,0 +1,36 @@
+@use '../../../global-teste.scss' as config;
+
+.header .containerMenuOptions .menuOptions {
+    @include config.flex(none, flex-start);
+    flex-direction: column;
+    gap: 10px;
+
+    position: absolute;
+    top:50px;
+    right: 0;
+    z-index: 1;
+
+    width: 200px;
+    padding: 10px;
+
+    background-color: config.$color-header;
+    border-radius: 10px;
+    border: 1px solid config.$color-fontSub;
+}
+
+.boxInfoTask .containerMenuOptions .menuOptionsTask{
+    @include config.flex(none, flex-end);
+    gap: 10px;
+
+    position: absolute;
+    top: 100px;
+    right: 30px;
+    z-index: 1;
+
+    max-width: 100%;
+    padding: 10px;
+
+    background-color: var(--bg-tasks);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 35, 35, 0.712);
+}
