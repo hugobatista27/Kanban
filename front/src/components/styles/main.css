@@ -21,13 +21,16 @@
   border: 1px solid #6e7180;
 }
 
+.boxInfoTask .containerMenuOptions {
+  top: 75px;
+}
+
 .boxInfoTask .containerMenuOptions .menuOptionsTask {
   display: flex;
   justify-content: none;
   align-items: flex-end;
   gap: 10px;
   position: absolute;
-  top: 75px;
   right: 30px;
   z-index: 1;
   max-width: 100%;
@@ -41,6 +44,16 @@
   color: #ffffff;
 }
 
+@media screen and (min-width: 600px) {
+  .showInfoTask .menuOptionsTask {
+    top: 70px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .showInfoTask .menuOptionsTask {
+    top: 100px;
+  }
+}
 .header {
   height: 97px;
   width: 100%;

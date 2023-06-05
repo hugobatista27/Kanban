@@ -7,9 +7,10 @@ import UserLogged from '../../contexts/userLogged';
 import MenuOptions from './menuOptions';
 import { useClickOutside } from '../generic/useClickOutside';
 
+
 function Header() {
-	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, isMobile, showSideBar} = useContext(ProjectContext);
-	const {idUser} = useContext(UserLogged)
+	const {selectedProject, setSelectedProject, setAtualizarFetchTasks, showSideBar} = useContext(ProjectContext);
+	const {idUser, isMobile} = useContext(UserLogged);
 
 	const [showMenuOptions, setShowMenuOptions] = useState(false) 
 	const refMenuOptions = useRef(null)

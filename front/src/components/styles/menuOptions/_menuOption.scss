@@ -19,12 +19,14 @@
     border: 1px solid config.$color-fontSub;
 }
 
+.boxInfoTask .containerMenuOptions {
+    top: 75px;
+}
 .boxInfoTask .containerMenuOptions .menuOptionsTask{
     @include config.flex(none, flex-end);
     gap: 10px;
 
     position: absolute;
-    top: 75px;
     right: 30px;
     z-index: 1;
 
@@ -38,4 +40,19 @@
 
 .menuOptionsTask > button, .menuOptions > button {
     color: config.$color-fontMain;
+}
+
+@media screen and (min-width: 600px) {
+    .showInfoTask {
+        .menuOptionsTask {
+            top: 70px;
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    .showInfoTask {
+        .menuOptionsTask {
+            top: 100px;
+        }
+    }
 }

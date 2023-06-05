@@ -10,8 +10,8 @@ import Server from '../../configs/server.js';
 function SideBar() {
     const {selectedProject, setSelectedProject} = useContext(ProjectContext)
     const {projects, setProjects} = useContext(ProjectContext)
-    const {showSideBar, setShowSideBar, isMobile} = useContext(ProjectContext);
-    const {idUser} = useContext(UserLogged);
+    const {showSideBar, setShowSideBar} = useContext(ProjectContext);
+    const {idUser, isMobile} = useContext(UserLogged);
     const refSideBar = useRef();
     const [repeatGetProjects, setRepeateGetProjects] = useState(null)
 
@@ -49,7 +49,7 @@ function SideBar() {
         if (!showSideBar) {
             setTimeout(() => {
                 refSideBar.current.classList.toggle('d-none')
-            }, 100)    
+            }, 10)    
         }
     }, [showSideBar])
 

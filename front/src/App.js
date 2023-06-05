@@ -4,8 +4,9 @@ import TaskArea from './components/taskArea/taskArea.jsx'
 
 import '././components/styles/main.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProjectContext from './contexts/selectedProjectState.js';
+import UserLogged from './contexts/userLogged.js';
 
 function App() {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -13,7 +14,7 @@ function App() {
     const [projects, setProjects] = useState([{_id: '1', projectName: 'Carregando...'}]);
     const [selectedTask, setSelectedTask] = useState(null);
     const [showSideBar, setShowSideBar] = useState(true);
-    const [isMobile, setIsMobile] = useState(true)
+    const {isMobile, setIsMobile} = useContext(UserLogged)
 
     const contextValues = {
         selectedProject, setSelectedProject,
@@ -21,7 +22,6 @@ function App() {
         projects, setProjects, 
         selectedTask,setSelectedTask,
         showSideBar, setShowSideBar,
-        isMobile, setIsMobile
     }
 
 
@@ -31,6 +31,7 @@ function App() {
             setIsMobile(false)
         } else {
             setShowSideBar(false)
+            setIsMobile(true)
         }
     }, [])
 
@@ -53,8 +54,8 @@ function App() {
                 {!isMobile && (
                     <SideBar/>
                 )}
-                <div id='contentArea'
-                    
+                <div 
+                    id='contentArea'
                     style={isMobile ? {width: 100 + '%'}: showSideBar ? {width: `calc(${100}% - ${250}px)`} : {width: 100+'%'} }> {/* provisório */}
                     <Header/>
                     {isMobile && (

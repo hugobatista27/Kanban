@@ -81,8 +81,12 @@
         @include config.flex(flex-end, center);
         width: 50%;
     }
-    #boxLogin {
+}
 
+@media screen and (max-width: 800px){
+    #boxLogin {
+        width: 90%;
+        padding: 20px;
     }
 }
 
@@ -93,5 +97,6 @@
     }
     #boxLogin {
         width: 90%;
+        max-width: 400px;
     }
 }
