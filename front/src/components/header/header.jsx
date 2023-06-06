@@ -77,6 +77,7 @@ function EditableTitle() {
 	const {selectedProject, setSelectedProject} = useContext(ProjectContext);
 	const [isEditing, setIsEditing] = useState(false);
 	const [titleValue, setTitleValue] = useState(selectedProject ? selectedProject.projectName : "");
+	const {idUser} = useContext(UserLogged);
 
 	const handleDoubleClick = () => {
 		setIsEditing(true);
@@ -89,11 +90,11 @@ function EditableTitle() {
 			setSelectedProject(newProjectTitle);
 
 			fetch(Server.projectChangeTitle, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(newProjectTitle)
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({...newProjectTitle, ...idUser})
 			})
 		}
 	};
