@@ -2,7 +2,7 @@ Disponível em https://kanban-livid-seven.vercel.app/ <br/>
 
 A ideia e o design do projeto vem do site FrontEnd Mentor. Adicionei várias outras funcionalidades além das propostas inicialmente.<br/>
 
-O código do Backend está em outro repositório. <br/>
+O código do Backend está em outro repositório que não está público por conter a conexão com o banco de dados. <br/>
 
 Está totalmente responsivo.
 
