@@ -22,8 +22,10 @@ header#welcome .logo {
   align-items: center;
   flex-direction: column;
   gap: 30px;
-  width: 70%;
-  padding: 35px;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 40px 20px;
   border: 1px solid black;
   border-radius: 16px;
 }
@@ -38,12 +40,12 @@ header#welcome .logo {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
   width: 90%;
 }
 #boxLogin .formLogin label, #boxLogin .formRegister label {
   width: 100%;
-  font-size: 12px;
+  font-size: 14px;
 }
 #boxLogin .formLogin input, #boxLogin .formRegister input {
   border: 1px solid black;
@@ -114,6 +116,8 @@ header#welcome .logo {
   }
   #boxLogin {
     width: 90%;
+    height: -moz-fit-content;
+    height: fit-content;
     max-width: 400px;
   }
 }
@@ -168,10 +172,13 @@ header#welcome .logo {
     width: 100%;
     padding: 30px;
   }
+  #boxSlogan .slogan {
+    flex: 0;
+  }
   #boxSlogan img {
     margin-right: 0;
-    width: 50%;
-    max-width: 160px;
+    flex: 1;
+    max-width: 140px;
   }
   .buttonsMobileLogin {
     display: flex;
@@ -180,8 +187,9 @@ header#welcome .logo {
     gap: 10px;
   }
   .buttonsMobileLogin .buttonLogin, .buttonsMobileLogin .buttonRegister {
-    font-size: 20px;
-    padding: 5px 14px;
+    font-size: 18px;
+    font-family: "Nunito Sans", sans-serif;
+    padding: 4px 14px;
     border-radius: 20px;
   }
   .buttonsMobileLogin .buttonLogin:hover, .buttonsMobileLogin .buttonRegister:hover {
@@ -203,5 +211,14 @@ header#welcome .logo {
     justify-content: space-around;
     align-items: center;
     gap: 50px;
+    height: 100%;
+    max-width: 1000px;
+  }
+}
+@media screen and (max-width: 600px) {
+  main.wellcome {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
 }/*# sourceMappingURL=main.css.map */

@@ -13,10 +13,10 @@
 
     .boxLogoMobile {
         color: config.$color-fontMain;
-        @include config.flex(center, center);
+        @include config.flex(start, center);
+        flex: 1;
         gap: 20px;
 
-        max-width: calc(100% - 200px);
     }
     h1, input {
         color: inherit;

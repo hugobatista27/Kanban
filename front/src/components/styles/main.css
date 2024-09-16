@@ -68,10 +68,10 @@
 .header .boxLogoMobile {
   color: #ffffff;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  flex: 1;
   gap: 20px;
-  max-width: calc(100% - 200px);
 }
 .header h1, .header input {
   color: inherit;
@@ -307,7 +307,7 @@
 .showInfoTask .boxInfoTask {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   box-sizing: border-box;
   padding: 35px 30px;
   background-color: #2c2c38;
@@ -365,7 +365,7 @@
   line-height: 154.9%;
 }
 .showInfoTask .boxInfoTask .boxSubtasks {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -471,6 +471,7 @@
   }
   .showInfoTask .boxInfoTask {
     margin: 25px;
+    padding: 16px;
   }
 }
 .open {
@@ -482,12 +483,22 @@
 }
 
 body {
+  position: relative;
+  height: 100vh;
   margin: 0;
   font-family: "Nunito Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /*         background-color: $color-tasks;
    */
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 * {
@@ -508,5 +519,6 @@ li {
 }
 
 .index {
+  width: 100%;
   display: flex;
 }/*# sourceMappingURL=main.css.map */

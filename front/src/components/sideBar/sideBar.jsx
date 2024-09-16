@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef, memo } from 'react';
 import ProjectContext from '../../contexts/selectedProjectState.js';
 import UserLogged from '../../contexts/userLogged.js';
-import {createNewProject, OptionsSideBar} from './optionsSideBar.jsx'
+import { OptionsSideBar} from './optionsSideBar.jsx'
 import Logo from '../../assets/images/Vectorlogo.svg'
 import Seta from '../../assets/images/seta.svg'
 import { useClickOutside } from '../generic/useClickOutside.js';
