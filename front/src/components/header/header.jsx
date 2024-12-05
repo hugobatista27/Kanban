@@ -1,6 +1,6 @@
 import ThreeLine from '../../assets/images/three-line.svg';
 import Logo from '../../assets/images/Vectorlogo.svg'
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import Server from '../../configs/server.js'
 import ProjectContext from '../../contexts/selectedProjectState';
 import UserLogged from '../../contexts/userLogged';

@@ -16,25 +16,12 @@ export default function IndexLoginScreen() {
     }
 
     useEffect(() => {
-        var windowWidth = document.body.clientWidth;
-        if (windowWidth > 600) {
-            setIsMobile(false)
-        } else {
-            setIsMobile(true)
-        }
+        setIsMobile(document.body.clientWidth < 600);
     }, [])
 
     window.addEventListener("resize", () => {
-        var windowWidth = document.body.clientWidth;
-        
-        if (windowWidth < 600) {
-            setIsMobile(true)
-        } 
-        if (windowWidth >= 600) {
-            setIsMobile(false)
-        }
+        setIsMobile(document.body.clientWidth < 600);
     })
-
 
     return (
         <UserLogged.Provider value={contextValues}>

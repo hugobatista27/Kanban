@@ -9,24 +9,23 @@ import UserLogged from '../contexts/userLogged';
 
 export default function Welcome() {
     const {isMobile} = useContext(UserLogged)
+
     if (!isMobile) {
         return (
             <>
-                <Header/>
                 <main className='wellcome'>
                     <BoxLogin/>
                     <Slogan/>
                 </main>
             </>
         )
-    } else if (isMobile) {
-        return(
-            <>
-                <Header/>
-                <main className='wellcome'>
-                    <Slogan/>
-                </main>
-            </>
-        )
     }
+
+    return(
+        <>
+            <main className='wellcome'>
+                <Slogan/>
+            </main>
+        </>
+    )
 }

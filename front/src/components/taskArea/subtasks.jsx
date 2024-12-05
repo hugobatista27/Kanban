@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import InputArea from '../generic/testeInput.jsx';
+import InputArea from '../generic/formInput.jsx';
 import Server from '../../configs/server.js';
 import ProjectContext from '../../contexts/selectedProjectState';
 import TrashIcon from '../../assets/images/trash-icon.svg'

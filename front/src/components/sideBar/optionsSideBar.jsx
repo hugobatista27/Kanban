@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import iconBoard from '../../assets/images/icon-board.svg'
 import Server from '../../configs/server'
-import ProjectContext from '../../contexts/selectedProjectState.js';
 import UserLogged from '../../contexts/userLogged';
 
 export async function createNewProject(name, idUser){
@@ -24,7 +23,6 @@ export async function createNewProject(name, idUser){
 
 export function OptionsSideBar({buttons, setSelectedProject, setRepeateGetProjects}) {
     const [isSelected, setIsSelected] = useState('')
-    const {selectedProject} = useContext(ProjectContext)
     const {idUser} = useContext(UserLogged);
     const [showLabelNewProject, setShowLabelNewProject] = useState(false);
     const inputRef = useRef(null)

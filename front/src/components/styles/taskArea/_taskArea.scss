@@ -71,7 +71,7 @@
     .boxInfoTask {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 16px;
     
         box-sizing: border-box;
     
@@ -134,7 +134,7 @@
         }
 
         .boxSubtasks {
-            max-height: 200px;
+            max-height: 300px;
             overflow-y: scroll;
         
             display: flex;
@@ -248,6 +248,7 @@
 
         .boxInfoTask {
             margin: 25px;
+            padding: 16px;
         }
     }
 }
